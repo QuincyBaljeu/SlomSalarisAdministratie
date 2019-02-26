@@ -1,7 +1,5 @@
 package Data;
 
-import java.time.LocalDate;
-
 public abstract class Employee {
 
     public int ID;
@@ -9,6 +7,14 @@ public abstract class Employee {
     public String lastName;
     public double salary;
     public String position;
+
+    public String toString() {
+        return "ID: " + this.ID + "\n"
+                + "First name: " + this.firstName + "\n"
+                + "Last name: " + this.lastName + "\n"
+                + "Salary: " + this.salary + "\n"
+                + "Position: " + this.salary;
+    }
 
     public int getID() {
         return ID;

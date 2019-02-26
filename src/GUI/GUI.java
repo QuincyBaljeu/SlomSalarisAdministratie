@@ -2,10 +2,7 @@ package GUI;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -49,10 +46,17 @@ public class GUI extends Application {
 
         //components general
         Button confirmData = new Button("Confirm data");
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Please enter all text fields");
+
         confirmData.setOnAction(event -> {
             for(TextField textField : textFields){
                 if(textField.getText().isEmpty()){
                     System.out.println("Leeg vak");
+                    alert.showAndWait();
                     return;
                 }
             }

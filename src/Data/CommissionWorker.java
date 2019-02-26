@@ -13,8 +13,14 @@ public class CommissionWorker extends Employee {
         this.amountOfCommissions = amountOfCommissions;
     }
 
-    public double getMonthlySalary(){
-        double bonus = Math.floor((amountOfCommissions /100)) * (0.10 * salary);
+    @Override
+    public String toString() {
+        return super.toString() + "\n"
+                + "Amount of commissions: " + this.amountOfCommissions;
+    }
+
+    public double getMonthlySalary() {
+        double bonus = Math.floor((amountOfCommissions / 100)) * (0.10 * salary);
         double monthlySalary = salary + bonus;
         return monthlySalary;
     }

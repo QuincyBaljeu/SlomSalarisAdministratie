@@ -13,6 +13,12 @@ public class PieceWorker extends Employee {
         this.amountOfPieces = amountOfPieces;
     }
 
+    @Override
+    public String toString(){
+        return super.toString() + "\n"
+                + "Amount of pieces: " + this.amountOfPieces;
+    }
+
     public double getMonthlySalary(){
         double monthlySalary = this.salary + (5 * this.amountOfPieces);
         return monthlySalary;

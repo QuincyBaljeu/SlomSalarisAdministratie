@@ -13,7 +13,13 @@ public class HourWorker extends Employee {
         this.hoursWorked = hoursWorked;
     }
 
-    public double getMonthlySalary(){
+    @Override
+    public String toString() {
+        return super.toString() + "\n"
+                + "Hours worked: " + this.hoursWorked;
+    }
+
+    public double getMonthlySalary() {
         double monthlySalary = this.hoursWorked * salary;
         return monthlySalary;
     }

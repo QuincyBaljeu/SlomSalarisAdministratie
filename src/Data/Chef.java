@@ -1,4 +1,5 @@
 package Data;
+
 public class Chef extends Employee {
 
     public double bonus;
@@ -15,15 +16,15 @@ public class Chef extends Employee {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return super.toString() + "\n"
                 + "Bonus: " + this.bonus + "\n"
                 + "Bonus assigned: " + this.bonusAssigned;
     }
 
-    public double getMonthlySalary(){
+    public double getMonthlySalary() {
         double monthlySalary;
-        if(this.bonusAssigned){
+        if (this.bonusAssigned) {
             monthlySalary = this.salary + this.bonus;
         } else {
             monthlySalary = this.salary;

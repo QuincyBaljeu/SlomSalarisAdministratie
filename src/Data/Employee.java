@@ -1,4 +1,5 @@
 package Data;
+
 public abstract class Employee {
 
     public int ID;

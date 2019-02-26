@@ -14,6 +14,12 @@ public class Main {
         PieceWorker pieceWorker = new PieceWorker(901, "Kerry", "King", 10, "piecer", 10);
 
         System.out.println(chef.toString());
+        System.out.println();
+        System.out.println(commissionWorker.toString());
+        System.out.println();
+        System.out.println(hourWorker.toString());
+        System.out.println();
+        System.out.println(pieceWorker.toString());
 
         //launch(GUI.GUI.class);
     }

@@ -1,7 +1,4 @@
 package Data;
-
-import java.time.LocalDate;
-
 public class Chef extends Employee {
 
     public double bonus;

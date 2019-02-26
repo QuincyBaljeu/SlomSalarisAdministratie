@@ -16,6 +16,6 @@ public class CommissionWorker extends Employee {
     public double getMonthlySalary(){
         double bonus = Math.floor((amountOfCommissions /100)) * (0.10 * salary);
         double monthlySalary = salary + bonus;
-        return (double)monthlySalary;
+        return monthlySalary;
     }
 }

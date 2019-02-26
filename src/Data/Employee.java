@@ -2,11 +2,11 @@ package Data;
 
 public abstract class Employee {
 
-    public int ID;
-    public String firstName;
-    public String lastName;
-    public double salary;
-    public String position;
+    protected int ID;
+    protected String firstName;
+    protected String lastName;
+    protected double salary;
+    protected String position;
 
     public String toString() {
         return "ID: " + this.ID + "\n"

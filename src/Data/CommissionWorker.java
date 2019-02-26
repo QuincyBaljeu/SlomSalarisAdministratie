@@ -2,7 +2,7 @@ package Data;
 
 public class CommissionWorker extends Employee {
 
-    public int amountOfCommissions;
+    protected int amountOfCommissions;
 
     public CommissionWorker(int ID, String firstName, String lastName, double salary, String position, int amountOfCommissions) {
         this.ID = ID;

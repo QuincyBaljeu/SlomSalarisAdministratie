@@ -2,7 +2,7 @@ package Data;
 
 public class HourWorker extends Employee {
 
-    public int hoursWorked;
+    protected int hoursWorked;
 
     public HourWorker(int ID, String firstName, String lastName, double salary, String position, int hoursWorked) {
         this.ID = ID;

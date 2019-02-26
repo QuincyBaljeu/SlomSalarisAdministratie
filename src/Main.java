@@ -13,6 +13,8 @@ public class Main {
         HourWorker hourWorker = new HourWorker(678,"Dave", "Lombardo",5,"hourwoeker", 20);
         PieceWorker pieceWorker = new PieceWorker(901, "Kerry", "King", 10, "piecer", 10);
 
-        launch(GUI.GUI.class);
+        System.out.println(chef.toString());
+
+        //launch(GUI.GUI.class);
     }
 }

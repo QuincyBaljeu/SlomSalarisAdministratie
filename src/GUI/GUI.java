@@ -1,6 +1,7 @@
 package GUI;
 
-import Data.Employee;
+import Data.*;
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -49,7 +50,7 @@ public class GUI extends Application {
         //components position
         Label positionLabel = new Label("Position: ");
         ComboBox comboBox = new ComboBox();
-        comboBox.getItems().addAll("Chef", "Commission worker", "Hour Worker", "Piece Worker");
+        comboBox.getItems().addAll("Chef", "Commission worker", "Hour worker", "Piece worker");
 
         //components general
         Button confirmData = new Button("Confirm data");
@@ -80,18 +81,55 @@ public class GUI extends Application {
         lastNameInvalidStringAlert.setContentText("Please enter a name in last name field");
 
         confirmData.setOnAction(event -> {
-
-            for(TextField textField : textFields){
-                if(textField.getText().isEmpty()){
+            //TODO Add invalid input type errors
+            for (TextField textField : textFields) {
+                if (textField.getText().isEmpty()) {
                     emptyFieldAlert.showAndWait();
                     return;
                 }
             }
+            if (comboBox.getValue().toString().equals("Chef")) {
+                //TODO assign text field value to bonus and assigned bonus
+                employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
+                        firstNameTextField.getText(),
+                        lastNameTextField.getText(),
+                        Double.parseDouble(salaryTextField.getText()),
+                        "Chef",
+                        10.0,
+                        true));
+            } else if (comboBox.getValue().toString().equals("Commission worker")) {
+                //TODO assign text field value to amountOfCommissions
+                employees.add(new CommissionWorker(Integer.parseInt(IDTextField.getText()),
+                        firstNameTextField.getText(),
+                        lastNameTextField.getText(),
+                        Double.parseDouble(salaryTextField.getText()),
+                        "Commission worker",
+                        10
+                ));
+            } else if (comboBox.getValue().toString().equals("Hour worker")) {
+                //TODO assign text field value to hoursWorked
+                employees.add(new HourWorker(Integer.parseInt(IDTextField.getText()),
+                        firstNameTextField.getText(),
+                        lastNameTextField.getText(),
+                        Double.parseDouble(salaryTextField.getText()),
+                        "Hour worker",
+                        123
+                ));
+            } else if (comboBox.getValue().toString().equals("Piece worker")) {
+                //TODO assign text field value to amountOfPieces
+                employees.add(new PieceWorker(Integer.parseInt(IDTextField.getText()),
+                        firstNameTextField.getText(),
+                        lastNameTextField.getText(),
+                        Double.parseDouble(salaryTextField.getText()),
+                        "Piece worker",
+                        123
+                ));
+            }
         });
 
         //finalizing scene
-        labelVbox.getChildren().addAll(IDLabel, firstNameLabel, lastNameLabel, salaryLabel);
-        textFieldVbox.getChildren().addAll(IDTextField, firstNameTextField, lastNameTextField, salaryTextField, confirmData, comboBox);
+        labelVbox.getChildren().addAll(IDLabel, firstNameLabel, lastNameLabel, salaryLabel, positionLabel);
+        textFieldVbox.getChildren().addAll(IDTextField, firstNameTextField, lastNameTextField, salaryTextField, comboBox, confirmData);
 
         hBox.getChildren().addAll(labelVbox, textFieldVbox);
 

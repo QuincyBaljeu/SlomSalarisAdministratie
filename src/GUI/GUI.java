@@ -54,6 +54,7 @@ public class GUI extends Application {
 
         //components general
         Button confirmData = new Button("Confirm data");
+        Button print = new Button("Print");
 
         Alert emptyFieldAlert = new Alert(Alert.AlertType.ERROR);
         emptyFieldAlert.setTitle("Error");
@@ -125,11 +126,21 @@ public class GUI extends Application {
                         123
                 ));
             }
+
+            for (TextField textField : textFields){
+                textField.setText("");
+            }
+            
+            print.setOnAction(event1 -> {
+                for (Employee employee : employees) {
+                    System.out.println(employee.toString() + "\n");
+                }
+            });
         });
 
         //finalizing scene
         labelVbox.getChildren().addAll(IDLabel, firstNameLabel, lastNameLabel, salaryLabel, positionLabel);
-        textFieldVbox.getChildren().addAll(IDTextField, firstNameTextField, lastNameTextField, salaryTextField, comboBox, confirmData);
+        textFieldVbox.getChildren().addAll(IDTextField, firstNameTextField, lastNameTextField, salaryTextField, comboBox, confirmData, print);
 
         hBox.getChildren().addAll(labelVbox, textFieldVbox);
 

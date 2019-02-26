@@ -89,6 +89,7 @@ public class GUI extends Application {
                     return;
                 }
             }
+
             if (comboBox.getValue().toString().equals("Chef")) {
                 //TODO assign text field value to bonus and assigned bonus
                 employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
@@ -130,11 +131,14 @@ public class GUI extends Application {
             for (TextField textField : textFields){
                 textField.setText("");
             }
-            
+
             print.setOnAction(event1 -> {
+                double totalSalary = 0;
                 for (Employee employee : employees) {
                     System.out.println(employee.toString() + "\n");
+                    totalSalary += employee.getSalary();
                 }
+                System.out.println("Total monthly salary: " + totalSalary);
             });
         });
 

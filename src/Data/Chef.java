@@ -2,8 +2,8 @@ package Data;
 
 public class Chef extends Employee {
 
-    public double bonus;
-    public boolean bonusAssigned;
+    protected double bonus;
+    protected boolean bonusAssigned;
 
     public Chef(int ID, String firstName, String lastName, double salary, String position, double bonus, Boolean bonusAssigned) {
         this.ID = ID;

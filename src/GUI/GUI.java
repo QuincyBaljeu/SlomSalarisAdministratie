@@ -17,6 +17,17 @@ public class GUI extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        TabPane tabPane = new TabPane();
+
+        Tab addWorker = new Tab("Add worker");
+        Tab salaryInfo = new Tab("Salary information");
+        Tab workerInfo = new Tab("Worker information");
+
+        tabPane.getTabs().addAll(addWorker, salaryInfo, workerInfo);
+
+        tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+
         stage.setTitle("Main menu");
         ArrayList<TextField> textFields = new ArrayList<>();
         ArrayList<Employee> employees = new ArrayList<>();
@@ -149,7 +160,7 @@ public class GUI extends Application {
 
         borderPane.setLeft(hBox);
 
-        Scene scene = new Scene(borderPane);
+        Scene scene = new Scene(tabPane);
         stage.setScene(scene);
         stage.show();
     }

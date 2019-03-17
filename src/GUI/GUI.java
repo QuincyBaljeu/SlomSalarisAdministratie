@@ -3,8 +3,11 @@ package GUI;
 import Data.*;
 import com.sun.xml.internal.bind.v2.model.core.ID;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -33,7 +36,7 @@ public class GUI extends Application {
 
         stage.setTitle("Main menu");
         ArrayList<TextField> textFields = new ArrayList<>();
-        ArrayList<Employee> employees = new ArrayList<>();
+        ObservableList<Employee> employees = FXCollections.observableArrayList();
 
 
         /**
@@ -187,7 +190,13 @@ public class GUI extends Application {
         TableColumn lastNameColumn = new TableColumn("Last name");
         TableColumn salaryColumn = new TableColumn("Salary");
 
+        idColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        salaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("salary"));
+
         salaryInfoTableView.getColumns().addAll(idColumn, lastNameColumn, salaryColumn);
+
+        salaryInfoTableView.setItems(employees);
 
 //        for (Employee worker : employees){
 //

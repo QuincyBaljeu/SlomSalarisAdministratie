@@ -3,8 +3,12 @@ package GUI;
 import Data.*;
 import com.sun.xml.internal.bind.v2.model.core.ID;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,20 +27,27 @@ public class GUI extends Application {
         Tab addWorker = new Tab("Add worker");
         Tab salaryInfo = new Tab("Salary information");
         Tab workerInfo = new Tab("Worker information");
+        Tab searchWorker = new Tab("Search worker");
+        Tab fileReader = new Tab("Read or load file");
 
-        tabPane.getTabs().addAll(addWorker, salaryInfo, workerInfo);
+        tabPane.getTabs().addAll(addWorker, salaryInfo, workerInfo, searchWorker, fileReader);
 
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
         stage.setTitle("Main menu");
         ArrayList<TextField> textFields = new ArrayList<>();
-        ArrayList<Employee> employees = new ArrayList<>();
+        ObservableList<Employee> employees = FXCollections.observableArrayList();
+
+
+        /**
+         * add Worker
+         */
 
         VBox labelVbox = new VBox();
         VBox textFieldVbox = new VBox();
         HBox hBox = new HBox();
 
-        BorderPane borderPane = new BorderPane();
+        BorderPane addWorkerBorderPane = new BorderPane();
 
         //Components ID
         Label IDLabel = new Label("Worker ID: ");
@@ -100,6 +111,7 @@ public class GUI extends Application {
                     return;
                 }
             }
+
             if (comboBox.getValue().toString().equals("Chef")) {
                 //TODO assign text field value to bonus and assigned bonus
                 employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
@@ -141,11 +153,14 @@ public class GUI extends Application {
             for (TextField textField : textFields){
                 textField.setText("");
             }
-            
+
             print.setOnAction(event1 -> {
+                double totalSalary = 0;
                 for (Employee employee : employees) {
                     System.out.println(employee.toString() + "\n");
+                    totalSalary += employee.getSalary();
                 }
+                System.out.println("Total monthly salary: " + totalSalary);
             });
         });
 
@@ -158,7 +173,43 @@ public class GUI extends Application {
         labelVbox.setSpacing(8);
         hBox.setSpacing(50);
 
-        borderPane.setLeft(hBox);
+        addWorkerBorderPane.setLeft(hBox);
+
+        addWorker.setContent(addWorkerBorderPane);
+
+
+        /**
+         *  Salary info
+         */
+
+        BorderPane salaryInfoBorderpane = new BorderPane();
+
+        TableView salaryInfoTableView = new TableView();
+
+        TableColumn idColumn = new TableColumn("Worker id");
+        TableColumn lastNameColumn = new TableColumn("Last name");
+        TableColumn salaryColumn = new TableColumn("Salary");
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        salaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("salary"));
+
+        salaryInfoTableView.getColumns().addAll(idColumn, lastNameColumn, salaryColumn);
+
+        salaryInfoTableView.setItems(employees);
+
+//        for (Employee worker : employees){
+//
+//        }
+
+        salaryInfoBorderpane.setCenter(salaryInfoTableView);
+
+        salaryInfo.setContent(salaryInfoBorderpane);
+
+
+        /**
+         *  Finalizing scene
+         */
 
         Scene scene = new Scene(tabPane);
         stage.setScene(scene);

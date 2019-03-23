@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27ca6fe0-3043-45d7-80e4-e24c49a3a97c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/Data/Chef.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/Data/Chef.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/Data/CommissionWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/Data/CommissionWorker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/Data/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/Data/Employee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/Data/HourWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/Data/HourWorker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/Data/PieceWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/Data/PieceWorker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/GUI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SlomSalarisAdministratie/GUI/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Chef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Chef.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/CommissionWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/CommissionWorker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/HourWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/HourWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/PieceWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/PieceWorker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -40,33 +29,33 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="3" />
+          <entry key="java" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="3" />
+          <entry key="JAVA" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1894" />
+          <entry key="java" value="2496" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1894" />
+          <entry key="JAVA" value="2496" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="215" column="8" selection-start-line="215" selection-start-column="8" selection-end-line="215" selection-end-column="8" />
+            <state relative-caret-position="112">
+              <caret line="152" column="24" lean-forward="true" selection-start-line="152" selection-start-column="24" selection-end-line="152" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -75,15 +64,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Data/Employee.java">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
+            <state relative-caret-position="32">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Data/Employee.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Data/PieceWorker.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="336">
@@ -147,12 +145,12 @@
         <option value="$PROJECT_DIR$/src/Data/Person.java" />
         <option value="$PROJECT_DIR$/src/Data/CommisionWorker.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/Data/Employee.java" />
         <option value="$PROJECT_DIR$/src/Data/PieceWorker.java" />
         <option value="$PROJECT_DIR$/src/Data/HourWorker.java" />
         <option value="$PROJECT_DIR$/src/Data/CommissionWorker.java" />
         <option value="$PROJECT_DIR$/src/Data/Chef.java" />
         <option value="$PROJECT_DIR$/src/GUI/GUI.java" />
+        <option value="$PROJECT_DIR$/src/Data/Employee.java" />
       </list>
     </option>
   </component>
@@ -200,7 +198,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553348584550" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553349805557" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -353,34 +351,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Data/Person.java" />
-    <entry file="file://$PROJECT_DIR$/src/GUI/GUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="215" column="8" selection-start-line="215" selection-start-column="8" selection-end-line="215" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Data/Employee.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Data/PieceWorker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="23" column="61" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
-          <folding>
-            <element signature="e#473#474#0" expanded="true" />
-            <element signature="e#547#548#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Data/HourWorker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -402,6 +372,41 @@
           <folding>
             <element signature="e#533#534#0" expanded="true" />
             <element signature="e#625#626#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="152" column="24" lean-forward="true" selection-start-line="152" selection-start-column="24" selection-end-line="152" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Data/Employee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Data/PieceWorker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="23" column="61" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
+          <folding>
+            <element signature="e#473#474#0" expanded="true" />
+            <element signature="e#547#548#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -112,42 +112,48 @@ public class GUI extends Application {
                 }
             }
 
-            if (comboBox.getValue().toString().equals("Chef")) {
-                //TODO assign text field value to bonus and assigned bonus
-                employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
-                        firstNameTextField.getText(),
-                        lastNameTextField.getText(),
-                        Double.parseDouble(salaryTextField.getText()),
-                        "Chef",
-                        10.0,
-                        true));
-            } else if (comboBox.getValue().toString().equals("Commission worker")) {
-                //TODO assign text field value to amountOfCommissions
-                employees.add(new CommissionWorker(Integer.parseInt(IDTextField.getText()),
-                        firstNameTextField.getText(),
-                        lastNameTextField.getText(),
-                        Double.parseDouble(salaryTextField.getText()),
-                        "Commission worker",
-                        10
-                ));
-            } else if (comboBox.getValue().toString().equals("Hour worker")) {
-                //TODO assign text field value to hoursWorked
-                employees.add(new HourWorker(Integer.parseInt(IDTextField.getText()),
-                        firstNameTextField.getText(),
-                        lastNameTextField.getText(),
-                        Double.parseDouble(salaryTextField.getText()),
-                        "Hour worker",
-                        123
-                ));
-            } else if (comboBox.getValue().toString().equals("Piece worker")) {
-                //TODO assign text field value to amountOfPieces
-                employees.add(new PieceWorker(Integer.parseInt(IDTextField.getText()),
-                        firstNameTextField.getText(),
-                        lastNameTextField.getText(),
-                        Double.parseDouble(salaryTextField.getText()),
-                        "Piece worker",
-                        123
-                ));
+            switch (comboBox.getValue().toString()) {
+                case "Chef":
+                    //TODO assign text field value to bonus and assigned bonus
+                    employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
+                            firstNameTextField.getText(),
+                            lastNameTextField.getText(),
+                            Double.parseDouble(salaryTextField.getText()),
+                            "Chef",
+                            10.0,
+                            true));
+                    break;
+
+                case "Commission worker":
+                    //TODO assign text field value to amountOfCommissions
+                    employees.add(new CommissionWorker(Integer.parseInt(IDTextField.getText()),
+                            firstNameTextField.getText(),
+                            lastNameTextField.getText(),
+                            Double.parseDouble(salaryTextField.getText()),
+                            "Commission worker",
+                            10
+                    ));
+                    break;
+                case "Hour worker":
+                    //TODO assign text field value to hoursWorked
+                    employees.add(new HourWorker(Integer.parseInt(IDTextField.getText()),
+                            firstNameTextField.getText(),
+                            lastNameTextField.getText(),
+                            Double.parseDouble(salaryTextField.getText()),
+                            "Hour worker",
+                            123
+                    ));
+                    break;
+                case "Piece worker":
+                    //TODO assign text field value to amountOfPieces
+                    employees.add(new PieceWorker(Integer.parseInt(IDTextField.getText()),
+                            firstNameTextField.getText(),
+                            lastNameTextField.getText(),
+                            Double.parseDouble(salaryTextField.getText()),
+                            "Piece worker",
+                            123
+                    ));
+                    break;
             }
 
             for (TextField textField : textFields){
@@ -206,12 +212,36 @@ public class GUI extends Application {
          * search tab
          */
         BorderPane searchBorderpane = new BorderPane();
-
         HBox searchHbox = new HBox();
+        searchHbox.setSpacing(25);
         TextField searchTextfield = new TextField();
         Button searchButton = new Button("Search");
-        searchHbox.getChildren().addAll(searchTextfield, searchButton);
+        ComboBox searchComboBox = new ComboBox();
+        searchComboBox.getItems().addAll("First name", "Last name", "ID");
 
+        ArrayList<Employee> searchResults = new ArrayList();
+
+        searchHbox.getChildren().addAll(searchTextfield, searchComboBox, searchButton);
+
+        TableView searchResultTable = new TableView();
+
+        searchButton.setOnAction(event -> {
+            switch (searchComboBox.getValue().toString()){
+                case "First name":
+                    System.out.println("fi");
+                    break;
+
+                case "Last name":
+                    System.out.println("la");
+                    break;
+
+                case  "ID":
+                    System.out.println("id");
+                    break;
+            }
+        });
+
+        searchBorderpane.setCenter(searchResultTable);
         searchBorderpane.setTop(searchHbox);
         searchWorker.setContent(searchBorderpane);
 

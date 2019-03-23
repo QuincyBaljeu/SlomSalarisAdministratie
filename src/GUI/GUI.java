@@ -219,26 +219,38 @@ public class GUI extends Application {
         ComboBox searchComboBox = new ComboBox();
         searchComboBox.getItems().addAll("First name", "Last name", "ID");
 
-        ArrayList<Employee> searchResults = new ArrayList();
+        ObservableList<Employee> searchResults = FXCollections.observableArrayList();
 
         searchHbox.getChildren().addAll(searchTextfield, searchComboBox, searchButton);
 
         TableView searchResultTable = new TableView();
 
         searchButton.setOnAction(event -> {
+           // searchResults.clear();
             switch (searchComboBox.getValue().toString()){
                 case "First name":
-                    System.out.println("fi");
+                    for(Employee employee : employees){
+                        if (employee.getFirstName().equals(searchTextfield.toString())){
+                            searchResults.add(employee);
+                        }
+                    }
                     break;
-
                 case "Last name":
-                    System.out.println("la");
+                    for (Employee employee : employees){
+                        if(employee.getLastName().equals(searchTextfield.toString())){
+                            searchResults.add(employee);
+                        }
+                    }
                     break;
-
                 case  "ID":
-                    System.out.println("id");
+                    for (Employee employee : employees){
+                        if (String.valueOf(employee.getID()).equals(searchTextfield.toString())){
+                            searchResults.add(employee);
+                        }
+                    }
                     break;
             }
+
         });
 
         searchBorderpane.setCenter(searchResultTable);

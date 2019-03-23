@@ -202,6 +202,18 @@ public class GUI extends Application {
 
         salaryInfo.setContent(salaryInfoBorderpane);
 
+        /**
+         * search tab
+         */
+        BorderPane searchBorderpane = new BorderPane();
+
+        HBox searchHbox = new HBox();
+        TextField searchTextfield = new TextField();
+        Button searchButton = new Button("Search");
+        searchHbox.getChildren().addAll(searchTextfield, searchButton);
+
+        searchBorderpane.setTop(searchHbox);
+        searchWorker.setContent(searchBorderpane);
 
         /**
          *  Finalizing scene

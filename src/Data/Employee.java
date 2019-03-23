@@ -16,6 +16,10 @@ public abstract class Employee {
                 + "Position: " + this.salary;
     }
 
+    public String getReaderString(){
+        return this.position + "#" + this.ID + "#" + this.firstName + "#" + this.lastName + "#" + this.salary;
+    }
+
     public int getID() {
         return ID;
     }

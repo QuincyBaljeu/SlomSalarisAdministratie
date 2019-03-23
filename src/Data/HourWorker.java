@@ -14,6 +14,11 @@ public class HourWorker extends Employee {
     }
 
     @Override
+    public String getReaderString(){
+        return super.getReaderString() + "#" + this.hoursWorked;
+    }
+
+    @Override
     public String toString() {
         return super.toString() + "\n"
                 + "Hours worked: " + this.hoursWorked;

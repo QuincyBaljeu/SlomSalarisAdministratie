@@ -16,6 +16,11 @@ public class Chef extends Employee {
     }
 
     @Override
+    public String getReaderString(){
+        return super.getReaderString() + "#" + this.bonus + "#" + this.bonusAssigned;
+    }
+
+    @Override
     public String toString() {
         return super.toString() + "\n"
                 + "Bonus: " + this.bonus + "\n"

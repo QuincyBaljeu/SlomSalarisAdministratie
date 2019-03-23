@@ -14,6 +14,11 @@ public class CommissionWorker extends Employee {
     }
 
     @Override
+    public String getReaderString(){
+        return super.getReaderString() + "#" + this.amountOfCommissions;
+    }
+
+    @Override
     public String toString() {
         return super.toString() + "\n"
                 + "Amount of commissions: " + this.amountOfCommissions;

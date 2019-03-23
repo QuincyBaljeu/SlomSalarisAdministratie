@@ -198,10 +198,6 @@ public class GUI extends Application {
 
         salaryInfoTableView.setItems(employees);
 
-//        for (Employee worker : employees){
-//
-//        }
-
         salaryInfoBorderpane.setCenter(salaryInfoTableView);
 
         salaryInfo.setContent(salaryInfoBorderpane);

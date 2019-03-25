@@ -14,6 +14,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -192,15 +194,15 @@ public class GUI extends Application {
 
         TableView salaryInfoTableView = new TableView();
 
-        TableColumn idColumn = new TableColumn("Worker id");
-        TableColumn lastNameColumn = new TableColumn("Last name");
-        TableColumn salaryColumn = new TableColumn("Salary");
+        TableColumn salaryIdColumn = new TableColumn("Worker id");
+        TableColumn salaryLastNameColumn = new TableColumn("Last name");
+        TableColumn salarySalaryColumn = new TableColumn("Salary");
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
-        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        salaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("salary"));
+        salaryIdColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
+        salaryLastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        salarySalaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("salary"));
 
-        salaryInfoTableView.getColumns().addAll(idColumn, lastNameColumn, salaryColumn);
+        salaryInfoTableView.getColumns().addAll(salaryIdColumn, salaryLastNameColumn, salarySalaryColumn);
 
         salaryInfoTableView.setItems(employees);
 
@@ -224,7 +226,7 @@ public class GUI extends Application {
         searchHbox.getChildren().addAll(searchTextfield, searchComboBox, searchButton);
 
         TableView searchResultTable = new TableView();
-
+        
         searchButton.setOnAction(event -> {
            // searchResults.clear();
             switch (searchComboBox.getValue().toString()){
@@ -289,15 +291,14 @@ public class GUI extends Application {
 
         objectIoReadButton.setOnAction(event -> {
             File file = fileChooser.showOpenDialog(null);
-            System.out.println(file.getAbsoluteFile());
         });
 
         textSaveButton.setOnAction(event -> {
-            File file = fileChooser.showOpenDialog(null);
+            String filename = "Employees" + LocalDate.now();
+            dataReader.saveDataToTextfile(filename,employees);
         });
 
         objectIoSaveButton.setOnAction(event -> {
-            File file = fileChooser.showOpenDialog(null);
         });
 
         fileReaderBorderpane.setRight(readFileVbox);

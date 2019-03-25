@@ -13,7 +13,11 @@ public abstract class Employee {
                 + "First name: " + this.firstName + "\n"
                 + "Last name: " + this.lastName + "\n"
                 + "Salary: " + this.salary + "\n"
-                + "Position: " + this.salary;
+                + "Position: " + this.position;
+    }
+
+    public String getReaderString(){
+        return this.position + "#" + this.ID + "#" + this.firstName + "#" + this.lastName + "#" + this.salary;
     }
 
     public int getID() {

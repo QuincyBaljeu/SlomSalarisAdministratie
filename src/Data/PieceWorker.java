@@ -14,6 +14,11 @@ public class PieceWorker extends Employee {
     }
 
     @Override
+    public String getReaderString(){
+        return super.getReaderString() + "#" + this.amountOfPieces;
+    }
+
+    @Override
     public String toString(){
         return super.toString() + "\n"
                 + "Amount of pieces: " + this.amountOfPieces;

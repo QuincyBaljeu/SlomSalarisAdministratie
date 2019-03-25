@@ -1,14 +1,12 @@
 package GUI;
 
 import Data.*;
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -112,42 +110,48 @@ public class GUI extends Application {
                 }
             }
 
-            if (comboBox.getValue().toString().equals("Chef")) {
-                //TODO assign text field value to bonus and assigned bonus
-                employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
-                        firstNameTextField.getText(),
-                        lastNameTextField.getText(),
-                        Double.parseDouble(salaryTextField.getText()),
-                        "Chef",
-                        10.0,
-                        true));
-            } else if (comboBox.getValue().toString().equals("Commission worker")) {
-                //TODO assign text field value to amountOfCommissions
-                employees.add(new CommissionWorker(Integer.parseInt(IDTextField.getText()),
-                        firstNameTextField.getText(),
-                        lastNameTextField.getText(),
-                        Double.parseDouble(salaryTextField.getText()),
-                        "Commission worker",
-                        10
-                ));
-            } else if (comboBox.getValue().toString().equals("Hour worker")) {
-                //TODO assign text field value to hoursWorked
-                employees.add(new HourWorker(Integer.parseInt(IDTextField.getText()),
-                        firstNameTextField.getText(),
-                        lastNameTextField.getText(),
-                        Double.parseDouble(salaryTextField.getText()),
-                        "Hour worker",
-                        123
-                ));
-            } else if (comboBox.getValue().toString().equals("Piece worker")) {
-                //TODO assign text field value to amountOfPieces
-                employees.add(new PieceWorker(Integer.parseInt(IDTextField.getText()),
-                        firstNameTextField.getText(),
-                        lastNameTextField.getText(),
-                        Double.parseDouble(salaryTextField.getText()),
-                        "Piece worker",
-                        123
-                ));
+            switch (comboBox.getValue().toString()) {
+                case "Chef":
+                    //TODO assign text field value to bonus and assigned bonus
+                    employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
+                            firstNameTextField.getText(),
+                            lastNameTextField.getText(),
+                            Double.parseDouble(salaryTextField.getText()),
+                            "Chef",
+                            10.0,
+                            true));
+                    break;
+
+                case "Commission worker":
+                    //TODO assign text field value to amountOfCommissions
+                    employees.add(new CommissionWorker(Integer.parseInt(IDTextField.getText()),
+                            firstNameTextField.getText(),
+                            lastNameTextField.getText(),
+                            Double.parseDouble(salaryTextField.getText()),
+                            "Commission worker",
+                            10
+                    ));
+                    break;
+                case "Hour worker":
+                    //TODO assign text field value to hoursWorked
+                    employees.add(new HourWorker(Integer.parseInt(IDTextField.getText()),
+                            firstNameTextField.getText(),
+                            lastNameTextField.getText(),
+                            Double.parseDouble(salaryTextField.getText()),
+                            "Hour worker",
+                            123
+                    ));
+                    break;
+                case "Piece worker":
+                    //TODO assign text field value to amountOfPieces
+                    employees.add(new PieceWorker(Integer.parseInt(IDTextField.getText()),
+                            firstNameTextField.getText(),
+                            lastNameTextField.getText(),
+                            Double.parseDouble(salaryTextField.getText()),
+                            "Piece worker",
+                            123
+                    ));
+                    break;
             }
 
             for (TextField textField : textFields){
@@ -198,14 +202,87 @@ public class GUI extends Application {
 
         salaryInfoTableView.setItems(employees);
 
-//        for (Employee worker : employees){
-//
-//        }
-
         salaryInfoBorderpane.setCenter(salaryInfoTableView);
 
         salaryInfo.setContent(salaryInfoBorderpane);
 
+        /**
+         * search tab
+         */
+        BorderPane searchBorderpane = new BorderPane();
+        HBox searchHbox = new HBox();
+        searchHbox.setSpacing(25);
+        TextField searchTextfield = new TextField();
+        Button searchButton = new Button("Search");
+        ComboBox searchComboBox = new ComboBox();
+        searchComboBox.getItems().addAll("First name", "Last name", "ID");
+
+        ObservableList<Employee> searchResults = FXCollections.observableArrayList();
+
+        searchHbox.getChildren().addAll(searchTextfield, searchComboBox, searchButton);
+
+        TableView searchResultTable = new TableView();
+
+        searchButton.setOnAction(event -> {
+           // searchResults.clear();
+            switch (searchComboBox.getValue().toString()){
+                case "First name":
+                    for(Employee employee : employees){
+                        if (employee.getFirstName().equals(searchTextfield.toString())){
+                            searchResults.add(employee);
+                        }
+                    }
+                    break;
+                case "Last name":
+                    for (Employee employee : employees){
+                        if(employee.getLastName().equals(searchTextfield.toString())){
+                            searchResults.add(employee);
+                        }
+                    }
+                    break;
+                case  "ID":
+                    for (Employee employee : employees){
+                        if (String.valueOf(employee.getID()).equals(searchTextfield.toString())){
+                            searchResults.add(employee);
+                        }
+                    }
+                    break;
+            }
+
+        });
+
+        searchBorderpane.setCenter(searchResultTable);
+        searchBorderpane.setTop(searchHbox);
+        searchWorker.setContent(searchBorderpane);
+
+        /**
+         *  File reader tab
+         */
+
+        DataReader dataReader = new DataReader();
+        BorderPane fileReaderBorderpane = new BorderPane();
+
+        //Text io
+        Button textReadButton = new Button("Read data from text file");
+        Button textSaveButton = new Button("Save data to text file");
+        Button objectIoReadButton = new Button("Read data from object file");
+        Button objectIoSaveButton = new Button("Save data to object file");
+
+        Label fileRead = new Label("Read data");
+        Label fileSave = new Label("Save data");
+
+        VBox readFileVbox = new VBox();
+        VBox saveFileVbox = new VBox();
+        readFileVbox.setSpacing(15);
+        saveFileVbox.setSpacing(15);
+
+        readFileVbox.getChildren().addAll(fileRead, textReadButton, objectIoReadButton);
+        saveFileVbox.getChildren().addAll(fileSave, textSaveButton, objectIoSaveButton);
+
+        fileReaderBorderpane.setRight(readFileVbox);
+        fileReaderBorderpane.setLeft(saveFileVbox);
+
+        fileReader.setContent(fileReaderBorderpane);
 
         /**
          *  Finalizing scene

@@ -1,14 +1,12 @@
 package GUI;
 
 import Data.*;
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -256,6 +254,35 @@ public class GUI extends Application {
         searchBorderpane.setCenter(searchResultTable);
         searchBorderpane.setTop(searchHbox);
         searchWorker.setContent(searchBorderpane);
+
+        /**
+         *  File reader tab
+         */
+
+        DataReader dataReader = new DataReader();
+        BorderPane fileReaderBorderpane = new BorderPane();
+
+        //Text io
+        Button textReadButton = new Button("Read data from text file");
+        Button textSaveButton = new Button("Save data to text file");
+        Button objectIoReadButton = new Button("Read data from object file");
+        Button objectIoSaveButton = new Button("Save data to object file");
+
+        Label fileRead = new Label("Read data");
+        Label fileSave = new Label("Save data");
+
+        VBox readFileVbox = new VBox();
+        VBox saveFileVbox = new VBox();
+        readFileVbox.setSpacing(15);
+        saveFileVbox.setSpacing(15);
+
+        readFileVbox.getChildren().addAll(fileRead, textReadButton, objectIoReadButton);
+        saveFileVbox.getChildren().addAll(fileSave, textSaveButton, objectIoSaveButton);
+
+        fileReaderBorderpane.setRight(readFileVbox);
+        fileReaderBorderpane.setLeft(saveFileVbox);
+
+        fileReader.setContent(fileReaderBorderpane);
 
         /**
          *  Finalizing scene

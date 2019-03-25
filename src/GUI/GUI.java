@@ -10,8 +10,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -278,6 +280,25 @@ public class GUI extends Application {
 
         readFileVbox.getChildren().addAll(fileRead, textReadButton, objectIoReadButton);
         saveFileVbox.getChildren().addAll(fileSave, textSaveButton, objectIoSaveButton);
+
+        FileChooser fileChooser = new FileChooser();
+        textReadButton.setOnAction(event -> {
+            File file = fileChooser.showOpenDialog(null);
+            System.out.println(file.getAbsoluteFile());
+        });
+
+        objectIoReadButton.setOnAction(event -> {
+            File file = fileChooser.showOpenDialog(null);
+            System.out.println(file.getAbsoluteFile());
+        });
+
+        textSaveButton.setOnAction(event -> {
+            File file = fileChooser.showOpenDialog(null);
+        });
+
+        objectIoSaveButton.setOnAction(event -> {
+            File file = fileChooser.showOpenDialog(null);
+        });
 
         fileReaderBorderpane.setRight(readFileVbox);
         fileReaderBorderpane.setLeft(saveFileVbox);

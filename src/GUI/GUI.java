@@ -226,34 +226,43 @@ public class GUI extends Application {
         searchHbox.getChildren().addAll(searchTextfield, searchComboBox, searchButton);
 
         TableView searchResultTable = new TableView();
-        
+        TableColumn searchTableColumnId = new TableColumn("ID");
+        searchTableColumnId.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
+        searchResultTable.getColumns().addAll(searchTableColumnId);
+
         searchButton.setOnAction(event -> {
            // searchResults.clear();
-            switch (searchComboBox.getValue().toString()){
+            System.out.println(searchComboBox.getValue().toString());
+            switch (searchTextfield.getText()){
                 case "First name":
                     for(Employee employee : employees){
-                        if (employee.getFirstName().equals(searchTextfield.toString())){
+                        if (employee.getFirstName().equals(searchTextfield.getText())){
                             searchResults.add(employee);
                         }
                     }
                     break;
                 case "Last name":
                     for (Employee employee : employees){
-                        if(employee.getLastName().equals(searchTextfield.toString())){
+                        if(employee.getLastName().equals(searchTextfield.getText())){
                             searchResults.add(employee);
                         }
                     }
                     break;
                 case  "ID":
                     for (Employee employee : employees){
-                        if (String.valueOf(employee.getID()).equals(searchTextfield.toString())){
+                        if (String.valueOf(employee.getID()).equals(searchTextfield.getText())){
                             searchResults.add(employee);
                         }
                     }
                     break;
             }
 
+            for (Employee employee : searchResults) {
+                System.out.println(employee.toString());
+            }
         });
+
+//        searchResultTable.setItems(searchResults);
 
         searchBorderpane.setCenter(searchResultTable);
         searchBorderpane.setTop(searchHbox);

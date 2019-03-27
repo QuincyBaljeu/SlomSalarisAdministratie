@@ -227,11 +227,14 @@ public class GUI extends Application {
 
         TableView searchResultTable = new TableView();
         TableColumn searchTableColumnId = new TableColumn("ID");
+        TableColumn searchTableColumnLastName = new TableColumn("Last name");
+
+        searchTableColumnLastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
         searchTableColumnId.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
-        searchResultTable.getColumns().addAll(searchTableColumnId);
+        searchResultTable.getColumns().addAll(searchTableColumnId, searchTableColumnLastName);
 
         searchButton.setOnAction(event -> {
-           // searchResults.clear();
+            searchResults.clear();
             switch ((String)searchComboBox.getValue()){
                 case "First name":
                     for(Employee employee : employees){

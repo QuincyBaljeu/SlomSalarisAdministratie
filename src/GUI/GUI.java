@@ -296,7 +296,7 @@ public class GUI extends Application {
         FileChooser fileChooser = new FileChooser();
         textReadButton.setOnAction(event -> {
             File file = fileChooser.showOpenDialog(null);
-            System.out.println(file.getAbsoluteFile());
+            dataReader.readDataFromTextfile(file, employees);
         });
 
         objectIoReadButton.setOnAction(event -> {

@@ -8,18 +8,45 @@ import java.util.Scanner;
 
 public class DataReader {
 
-    public void readDataFromTextfile(File file, ArrayList<Employee> employees){
+    public void readDataFromTextfile(File file, ObservableList<Employee> employees){
 
-        Scanner scanner = null;
+        try(Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()){
+                String employeeString = scanner.nextLine();
+                Scanner employeeScanner = new Scanner(employeeString);
+                employeeScanner.useDelimiter("#");
 
-        try {
-            scanner = new Scanner(file);
+                while (employeeScanner.hasNext()){
+                    String position = employeeScanner.next();
+                    switch(position){
+                        case "Chef":
+                            int ID = employeeScanner.nextInt();
+                            String firstName = employeeScanner.next();
+                            String lastName = employeeScanner.next();
+                            double salary = employeeScanner.nextDouble();
+                            double bonus = employeeScanner.nextDouble();
+                            boolean bonusAssigned = employeeScanner.hasNextBoolean();
+
+                            employees.add(new Chef(ID, firstName, lastName, salary, position, bonus, bonusAssigned));
+                            break;
+
+                        case "CommissionWorker":
+
+                            break;
+
+                        case "HourWorker":
+
+                            break;
+
+                        case "PieceWorker":
+
+                            break;
+                    }
+                }
+            }
+
         } catch (FileNotFoundException e){
             e.printStackTrace();
-        }
-
-        while(scanner.hasNextLine()){
-            Scanner employeeScanner = new Scanner(scanner.nextLine());
         }
     }
 
@@ -35,14 +62,6 @@ public class DataReader {
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }
-
-//
-//        for (Employee employee : employees){
-//            System.out.println(employee.getReaderString());
-//            printWriter.println(employee.getReaderString());
-//        }
-
-
     }
 
     public void readDataFromObjectfile(File file, ArrayList<Employee> employees){

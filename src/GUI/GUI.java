@@ -232,8 +232,7 @@ public class GUI extends Application {
 
         searchButton.setOnAction(event -> {
            // searchResults.clear();
-            System.out.println(searchComboBox.getValue().toString());
-            switch (searchTextfield.getText()){
+            switch ((String)searchComboBox.getValue()){
                 case "First name":
                     for(Employee employee : employees){
                         if (employee.getFirstName().equals(searchTextfield.getText())){
@@ -256,13 +255,12 @@ public class GUI extends Application {
                     }
                     break;
             }
-
             for (Employee employee : searchResults) {
                 System.out.println(employee.toString());
             }
         });
 
-//        searchResultTable.setItems(searchResults);
+     searchResultTable.setItems(searchResults);
 
         searchBorderpane.setCenter(searchResultTable);
         searchBorderpane.setTop(searchHbox);

@@ -263,7 +263,7 @@ public class GUI extends Application {
             }
         });
 
-     searchResultTable.setItems(searchResults);
+        searchResultTable.setItems(searchResults);
 
         searchBorderpane.setCenter(searchResultTable);
         searchBorderpane.setTop(searchHbox);

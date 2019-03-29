@@ -45,36 +45,48 @@ public class GUI extends Application {
          * add Worker
          */
 
-        VBox labelVbox = new VBox();
-        VBox textFieldVbox = new VBox();
-        HBox hBox = new HBox();
-
+        VBox componentVbox = new VBox();
         BorderPane addWorkerBorderPane = new BorderPane();
 
         //Components ID
         Label IDLabel = new Label("Worker ID: ");
         TextField IDTextField = new TextField();
+        HBox IDHbox = new HBox();
         textFields.add(IDTextField);
+        IDHbox.setSpacing(50);
+        IDHbox.getChildren().addAll(IDLabel, IDTextField);
 
         //components first name
         Label firstNameLabel = new Label("First name: ");
         TextField firstNameTextField = new TextField();
+        HBox firstNameHbox = new HBox();
         textFields.add(firstNameTextField);
+        firstNameHbox.setSpacing(50);
+        firstNameHbox.getChildren().addAll(firstNameLabel, firstNameTextField);
 
         //components last name
         Label lastNameLabel = new Label("Last name: ");
         TextField lastNameTextField = new TextField();
+        HBox lastNameHbox = new HBox();
         textFields.add(lastNameTextField);
+        lastNameHbox.setSpacing(50);
+        lastNameHbox.getChildren().addAll(lastNameLabel, lastNameTextField);
 
         //components salary
         Label salaryLabel = new Label("Salary: ");
         TextField salaryTextField = new TextField();
+        HBox salaryHbox = new HBox();
         textFields.add(salaryTextField);
+        salaryHbox.setSpacing(75);
+        salaryHbox.getChildren().addAll(salaryLabel, salaryTextField);
 
         //components position
         Label positionLabel = new Label("Position: ");
-        ComboBox comboBox = new ComboBox();
-        comboBox.getItems().addAll("Chef", "Commission worker", "Hour worker", "Piece worker");
+        ComboBox positionComboBox = new ComboBox();
+        HBox positionHbox = new HBox();
+        positionComboBox.getItems().addAll("Chef", "Commission worker", "Hour worker", "Piece worker");
+        positionHbox.setSpacing(63);
+        positionHbox.getChildren().addAll(positionLabel, positionComboBox);
 
         //components general
         Button confirmData = new Button("Confirm data");
@@ -114,7 +126,7 @@ public class GUI extends Application {
                 }
             }
 
-            switch (comboBox.getValue().toString()) {
+            switch (positionComboBox.getValue().toString()) {
                 case "Chef":
                     Boolean idInUse = false;
                     for (Employee employee : employees) {
@@ -224,15 +236,10 @@ public class GUI extends Application {
         });
 
         //finalizing scene
-        labelVbox.getChildren().addAll(IDLabel, firstNameLabel, lastNameLabel, salaryLabel, positionLabel);
-        textFieldVbox.getChildren().addAll(IDTextField, firstNameTextField, lastNameTextField, salaryTextField, comboBox, confirmData, print);
+        componentVbox.setSpacing(5);
+        componentVbox.getChildren().addAll( positionHbox, IDHbox, firstNameHbox, lastNameHbox, salaryHbox, confirmData);
 
-        hBox.getChildren().addAll(labelVbox, textFieldVbox);
-
-        labelVbox.setSpacing(8);
-        hBox.setSpacing(50);
-
-        addWorkerBorderPane.setLeft(hBox);
+        addWorkerBorderPane.setLeft(componentVbox);
 
         addWorker.setContent(addWorkerBorderPane);
 

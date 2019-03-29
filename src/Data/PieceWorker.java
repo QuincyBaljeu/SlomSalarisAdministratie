@@ -11,6 +11,7 @@ public class PieceWorker extends Employee {
         this.salary = salary;
         this.position = position;
         this.amountOfPieces = amountOfPieces;
+        this.monthlySalary = getMonthlySalary();
     }
 
     @Override

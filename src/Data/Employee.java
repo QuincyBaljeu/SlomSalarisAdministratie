@@ -7,6 +7,7 @@ public abstract class Employee {
     protected String lastName;
     protected double salary;
     protected String position;
+    protected double monthlySalary;
 
     public String toString() {
         return "ID: " + this.ID + "\n"

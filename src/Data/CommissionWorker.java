@@ -11,6 +11,7 @@ public class CommissionWorker extends Employee {
         this.salary = salary;
         this.position = position;
         this.amountOfCommissions = amountOfCommissions;
+        this.monthlySalary = getMonthlySalary();
     }
 
     @Override

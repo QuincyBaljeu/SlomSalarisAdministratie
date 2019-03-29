@@ -13,6 +13,7 @@ public class Chef extends Employee {
         this.position = position;
         this.bonus = bonus;
         this.bonusAssigned = bonusAssigned;
+        this.monthlySalary = getMonthlySalary();
     }
 
     @Override

@@ -335,7 +335,8 @@ public class GUI extends Application {
         workerInfoTotalHbox.setSpacing(20);
         Button workerInfoTotal = new Button("Total cost");
         Label totalSalaryCostLabel = new Label("");
-        workerInfoTotalHbox.getChildren().addAll(workerInfoTotal, totalSalaryCostLabel);
+        Button workerInfoDelete = new Button("Delete Employee");
+        workerInfoTotalHbox.getChildren().addAll(workerInfoDelete, workerInfoTotal, totalSalaryCostLabel);
 
         TableColumn workerIdColumn = new TableColumn("Worker id");
         TableColumn workerLastNameColumn = new TableColumn("Last name");
@@ -357,8 +358,16 @@ public class GUI extends Application {
             totalSalaryCostLabel.setText("Total salary cost per month: €" + totalSalary);
         });
 
-        workerInfoBorderpane.setBottom(workerInfoTableView);
+        workerInfoDelete.setOnAction(event -> {
+            Employee selectedEmployee = (Employee)workerInfoTableView.getSelectionModel().getSelectedItem();
+            if(selectedEmployee != null){
+                employees.remove(selectedEmployee);
+                workerInfoTableView.getItems().remove(selectedEmployee);
+            }
+        });
+
         workerInfoBorderpane.setTop(workerInfoTotalHbox);
+        workerInfoBorderpane.setBottom(workerInfoTableView);
 
         workerInfo.setContent(workerInfoBorderpane);
 

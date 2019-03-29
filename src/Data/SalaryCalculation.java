@@ -1,6 +1,6 @@
 package Data;
 
-public class SalaryCalculation extends Employee{
+public class SalaryCalculation{
 
     private int ID;
     private String lastName;

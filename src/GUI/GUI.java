@@ -269,9 +269,12 @@ public class GUI extends Application {
         HBox salaryInfoHbox = new HBox();
         Label salaryInfoIdLabel = new Label("Enter employee id");
         Label salaryInfoWeekLabel = new Label("Amount of weeks");
+        Label salaryInfoTotalSalaryLabel = new Label("");
         TextField salaryInfoWeeks = new TextField();
         TextField salaryInfoId = new TextField();
         Button salaryInfoButton = new Button("Add employee");
+        Button salaryInfoTotalSalary = new Button("Total salary this period");
+        Button salaryInfoDelete = new Button("Delete");
 
         TableView salaryInfoTableview = new TableView();
 
@@ -285,40 +288,39 @@ public class GUI extends Application {
 
         salaryInfoTableview.getColumns().addAll(salaryInfoIDColumn, salaryInfoLastNameColumn, salaryInfoSalaryColumn);
 
-//        salaryInfoButton.setOnAction(event -> {
-//            salaryInfoTableview.getItems().clear();
-//            Employee selectedEmployee = null;
-//            for(Employee employee : employees){
-//                if(employee.getID() == Integer.valueOf(salaryInfoId.getText())){
-//                    selectedEmployee = employee;
-//                    break;
-//                }
-//            }
-//
-//            if(selectedEmployee != null){
-//                int ID = selectedEmployee.getID();
-//                String lastName = selectedEmployee.getLastName();
-//                double salary = (selectedEmployee.getMonthlySalary()) * Integer.valueOf(salaryInfoWeeks.getText());
-//                salaryList.add(new SalaryCalculation(ID, lastName, salary));
-//            }
-//
-//            double totalSalary = 0;
-//            for (SalaryCalculation salaryCalculation : salaryList) {
-//                totalSalary += salaryCalculation.getSalary();
-//                salaryList.add(new SalaryCalculation(0, "Total salary cost: ", totalSalary));
-//            }
-//
-//            for (SalaryCalculation salaryCalculation : salaryList) {
-//                System.out.println(salaryCalculation.getID());
-//            }
-//        });
+        salaryInfoButton.setOnAction(event -> {
+            for (Employee employee : employees){
+                if(Integer.valueOf(salaryInfoId.getText()) == employee.getID()){
+                    double salary = (employee.getMonthlySalary()/4) * Integer.valueOf(salaryInfoWeeks.getText());
+                    salaryList.add(new SalaryCalculation(Integer.valueOf(salaryInfoId.getText()), employee.getLastName(), salary));
+                }
+            }
 
+            for (SalaryCalculation salaryCalculation : salaryList) {
+                System.out.println(salaryCalculation.getID());
+            }
+        });
 
+        salaryInfoTotalSalary.setOnAction(event -> {
+            double totalSalary = 0;
+            for(SalaryCalculation calculation : salaryList){
+                totalSalary += calculation.getSalary();
+            }
+            salaryInfoTotalSalaryLabel.setText("€" + totalSalary);
+        });
+
+        salaryInfoDelete.setOnAction(event -> {
+            SalaryCalculation selected = (SalaryCalculation)salaryInfoTableview.getSelectionModel().getSelectedItem();
+            if(selected != null){
+                salaryList.remove(selected);
+                salaryInfoTableview.getItems().remove(selected);
+            }
+        });
 
         salaryInfoTableview.setItems(salaryList);
 
         salaryInfoHbox.setSpacing(10);
-        salaryInfoHbox.getChildren().addAll(salaryInfoIdLabel, salaryInfoId, salaryInfoWeekLabel, salaryInfoWeeks, salaryInfoButton);
+        salaryInfoHbox.getChildren().addAll(salaryInfoIdLabel, salaryInfoId, salaryInfoWeekLabel, salaryInfoWeeks, salaryInfoButton,salaryInfoDelete, salaryInfoTotalSalary, salaryInfoTotalSalaryLabel);
         salaryInfoBorderPane.setLeft(salaryInfoHbox);
         salaryInfoBorderPane.setBottom(salaryInfoTableview);
         salaryInfo.setContent(salaryInfoBorderPane);
@@ -442,8 +444,6 @@ public class GUI extends Application {
         //Text io
         Button textReadButton = new Button("Read data from text file");
         Button textSaveButton = new Button("Save data to text file");
-        Button objectIoReadButton = new Button("Read data from object file");
-        Button objectIoSaveButton = new Button("Save data to object file");
 
         Label fileRead = new Label("Read data");
         Label fileSave = new Label("Save data");
@@ -453,8 +453,8 @@ public class GUI extends Application {
         readFileVbox.setSpacing(15);
         saveFileVbox.setSpacing(15);
 
-        readFileVbox.getChildren().addAll(fileRead, textReadButton, objectIoReadButton);
-        saveFileVbox.getChildren().addAll(fileSave, textSaveButton, objectIoSaveButton);
+        readFileVbox.getChildren().addAll(fileRead, textReadButton);
+        saveFileVbox.getChildren().addAll(fileSave, textSaveButton);
 
         FileChooser fileChooser = new FileChooser();
         textReadButton.setOnAction(event -> {
@@ -462,16 +462,9 @@ public class GUI extends Application {
             dataReader.readDataFromTextfile(file, employees);
         });
 
-        objectIoReadButton.setOnAction(event -> {
-            File file = fileChooser.showOpenDialog(null);
-        });
-
         textSaveButton.setOnAction(event -> {
             String filename = "Employees" + LocalDate.now();
             dataReader.saveDataToTextfile(filename,employees);
-        });
-
-        objectIoSaveButton.setOnAction(event -> {
         });
 
         fileReaderBorderpane.setRight(readFileVbox);
@@ -483,6 +476,7 @@ public class GUI extends Application {
          *  Finalizing scene
          */
 
+        stage.setWidth(1300);
         Scene scene = new Scene(tabPane);
         stage.setScene(scene);
         stage.show();

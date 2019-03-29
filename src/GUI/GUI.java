@@ -266,7 +266,6 @@ public class GUI extends Application {
          *  Salary Info
          */
 
-
         BorderPane salaryInfoBorderPane = new BorderPane();
         ObservableList<Employee> salaryList = FXCollections.observableArrayList();
         HBox salaryInfoHbox = new HBox();
@@ -274,12 +273,31 @@ public class GUI extends Application {
         Label salaryInfoWeekLabel = new Label("Amount of weeks");
         TextField salaryInfoWeeks = new TextField();
         TextField salaryInfoId = new TextField();
-
         Button salaryInfoButton = new Button("Add employee");
 
+        TableView salaryInfoTableview = new TableView();
 
+        TableColumn salaryInfoIDColumn = new TableColumn("Worker id");
+        TableColumn salaryInfoLastNameColumn = new TableColumn("Last name");
+        TableColumn salaryInfoSalaryColumn = new TableColumn("Salary");
+
+        salaryInfoIDColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
+        salaryInfoLastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        salaryInfoSalaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("salary"));
+
+        salaryInfoTableview.getColumns().addAll(salaryInfoIDColumn, salaryInfoLastNameColumn, salaryInfoSalaryColumn);
+
+        salaryInfoButton.setOnAction(event -> {
+
+            
+
+
+        });
+
+        salaryInfoHbox.setSpacing(10);
         salaryInfoHbox.getChildren().addAll(salaryInfoIdLabel, salaryInfoId, salaryInfoWeekLabel, salaryInfoWeeks, salaryInfoButton);
         salaryInfoBorderPane.setLeft(salaryInfoHbox);
+        salaryInfoBorderPane.setBottom(salaryInfoTableview);
         salaryInfo.setContent(salaryInfoBorderPane);
 
         /**

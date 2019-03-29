@@ -53,7 +53,7 @@ public class GUI extends Application {
         TextField IDTextField = new TextField();
         HBox IDHbox = new HBox();
         textFields.add(IDTextField);
-        IDHbox.setSpacing(50);
+        IDHbox.setSpacing(200);
         IDHbox.getChildren().addAll(IDLabel, IDTextField);
 
         //components first name
@@ -61,7 +61,7 @@ public class GUI extends Application {
         TextField firstNameTextField = new TextField();
         HBox firstNameHbox = new HBox();
         textFields.add(firstNameTextField);
-        firstNameHbox.setSpacing(50);
+        firstNameHbox.setSpacing(200);
         firstNameHbox.getChildren().addAll(firstNameLabel, firstNameTextField);
 
         //components last name
@@ -69,7 +69,7 @@ public class GUI extends Application {
         TextField lastNameTextField = new TextField();
         HBox lastNameHbox = new HBox();
         textFields.add(lastNameTextField);
-        lastNameHbox.setSpacing(50);
+        lastNameHbox.setSpacing(200);
         lastNameHbox.getChildren().addAll(lastNameLabel, lastNameTextField);
 
         //components salary
@@ -77,7 +77,7 @@ public class GUI extends Application {
         TextField salaryTextField = new TextField();
         HBox salaryHbox = new HBox();
         textFields.add(salaryTextField);
-        salaryHbox.setSpacing(75);
+        salaryHbox.setSpacing(225);
         salaryHbox.getChildren().addAll(salaryLabel, salaryTextField);
 
         //components position
@@ -85,8 +85,26 @@ public class GUI extends Application {
         ComboBox positionComboBox = new ComboBox();
         HBox positionHbox = new HBox();
         positionComboBox.getItems().addAll("Chef", "Commission worker", "Hour worker", "Piece worker");
-        positionHbox.setSpacing(63);
+        positionHbox.setSpacing(213);
         positionHbox.getChildren().addAll(positionLabel, positionComboBox);
+
+        //components extra
+        Label extraInfoLabel = new Label("Bonus: " + "\n" +
+                                        "Amount of commissions: " + "\n" +
+                                        "Hours Worked: " + "\n" +
+                                        "Amount of Pieces: ");
+        TextField extraInfoTextField = new TextField();
+        HBox extraInfoHbox = new HBox();
+        textFields.add(extraInfoTextField);
+        extraInfoHbox.setSpacing(113);
+        extraInfoHbox.getChildren().addAll(extraInfoLabel, extraInfoTextField);
+
+        //components bonus
+        Label bonusAssignedLabel = new Label("Bonus assigned: ");
+        CheckBox bonusAssignedCheckbox = new CheckBox();
+        HBox bonusAssignedHbox = new HBox();
+        bonusAssignedHbox.setSpacing(200);
+        bonusAssignedHbox.getChildren().addAll(bonusAssignedLabel, bonusAssignedCheckbox);
 
         //components general
         Button confirmData = new Button("Confirm data");
@@ -142,8 +160,8 @@ public class GUI extends Application {
                                 lastNameTextField.getText(),
                                 Double.parseDouble(salaryTextField.getText()),
                                 "Chef",
-                                10.0,
-                                true));
+                                Double.valueOf(extraInfoTextField.getText()),
+                                bonusAssignedCheckbox.isSelected()));
                     } else {
                         System.out.println("in use");
                     }
@@ -167,7 +185,7 @@ public class GUI extends Application {
                                 lastNameTextField.getText(),
                                 Double.parseDouble(salaryTextField.getText()),
                                 "Commission worker",
-                                10
+                                Integer.valueOf(extraInfoTextField.getText())
                         ));
                     } else {
                         System.out.println("in use");
@@ -189,7 +207,7 @@ public class GUI extends Application {
                                 lastNameTextField.getText(),
                                 Double.parseDouble(salaryTextField.getText()),
                                 "Hour worker",
-                                123
+                                Integer.valueOf(extraInfoTextField.getText())
                         ));
                     } else {
                         System.out.println("in use");
@@ -212,7 +230,7 @@ public class GUI extends Application {
                                 lastNameTextField.getText(),
                                 Double.parseDouble(salaryTextField.getText()),
                                 "Piece worker",
-                                123
+                                Integer.valueOf(extraInfoTextField.getText())
                         ));
                     } else {
                         System.out.println("in use");
@@ -237,7 +255,7 @@ public class GUI extends Application {
 
         //finalizing scene
         componentVbox.setSpacing(5);
-        componentVbox.getChildren().addAll( positionHbox, IDHbox, firstNameHbox, lastNameHbox, salaryHbox, confirmData);
+        componentVbox.getChildren().addAll( positionHbox, IDHbox, firstNameHbox, lastNameHbox, salaryHbox, extraInfoHbox, bonusAssignedHbox, confirmData);
 
         addWorkerBorderPane.setLeft(componentVbox);
 

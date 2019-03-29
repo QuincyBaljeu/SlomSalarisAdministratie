@@ -40,9 +40,7 @@ public class GUI extends Application {
         ObservableList<Employee> employees = FXCollections.observableArrayList();
 
 
-        /**
-         * add Worker
-         */
+        //TODO Add employees
 
         Alert emptyFieldAlert = new Alert(Alert.AlertType.ERROR);
         emptyFieldAlert.setTitle("Empty text field");
@@ -95,9 +93,9 @@ public class GUI extends Application {
 
         //components extra
         Label extraInfoLabel = new Label("Bonus: " + "\n" +
-                                        "Amount of commissions: " + "\n" +
-                                        "Hours Worked: " + "\n" +
-                                        "Amount of Pieces: ");
+                "Amount of commissions: " + "\n" +
+                "Hours Worked: " + "\n" +
+                "Amount of Pieces: ");
         TextField extraInfoTextField = new TextField();
         HBox extraInfoHbox = new HBox();
         textFields.add(extraInfoTextField);
@@ -141,8 +139,6 @@ public class GUI extends Application {
                                     "Chef",
                                     Double.valueOf(extraInfoTextField.getText()),
                                     bonusAssignedCheckbox.isSelected()));
-                        } else {
-                            System.out.println("in use");
                         }
                         break;
 
@@ -163,8 +159,6 @@ public class GUI extends Application {
                                     "Commission worker",
                                     Integer.valueOf(extraInfoTextField.getText())
                             ));
-                        } else {
-                            System.out.println("in use");
                         }
 
                         break;
@@ -185,8 +179,6 @@ public class GUI extends Application {
                                     "Hour worker",
                                     Integer.valueOf(extraInfoTextField.getText())
                             ));
-                        } else {
-                            System.out.println("in use");
                         }
 
                         break;
@@ -207,18 +199,16 @@ public class GUI extends Application {
                                     "Piece worker",
                                     Integer.valueOf(extraInfoTextField.getText())
                             ));
-                        } else {
-                            System.out.println("in use");
                         }
                         break;
                 }
-            } catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 emptyFieldAlert.showAndWait();
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid input");
             }
 
-            for (TextField textField : textFields){
+            for (TextField textField : textFields) {
                 textField.setText("");
             }
 
@@ -240,9 +230,7 @@ public class GUI extends Application {
 
         addWorker.setContent(addWorkerBorderPane);
 
-        /**
-         *  Salary Info
-         */
+        //TODO Salary information
 
         BorderPane salaryInfoBorderPane = new BorderPane();
         ObservableList<SalaryCalculation> salaryList = FXCollections.observableArrayList();
@@ -269,9 +257,9 @@ public class GUI extends Application {
         salaryInfoTableview.getColumns().addAll(salaryInfoIDColumn, salaryInfoLastNameColumn, salaryInfoSalaryColumn);
 
         salaryInfoButton.setOnAction(event -> {
-            for (Employee employee : employees){
-                if(Integer.valueOf(salaryInfoId.getText()) == employee.getID()){
-                    double salary = (employee.getMonthlySalary()/4) * Integer.valueOf(salaryInfoWeeks.getText());
+            for (Employee employee : employees) {
+                if (Integer.valueOf(salaryInfoId.getText()) == employee.getID()) {
+                    double salary = (employee.getMonthlySalary() / 4) * Integer.valueOf(salaryInfoWeeks.getText());
                     salaryList.add(new SalaryCalculation(Integer.valueOf(salaryInfoId.getText()), employee.getLastName(), salary));
                 }
             }
@@ -283,15 +271,15 @@ public class GUI extends Application {
 
         salaryInfoTotalSalary.setOnAction(event -> {
             double totalSalary = 0;
-            for(SalaryCalculation calculation : salaryList){
+            for (SalaryCalculation calculation : salaryList) {
                 totalSalary += calculation.getSalary();
             }
             salaryInfoTotalSalaryLabel.setText("€" + totalSalary);
         });
 
         salaryInfoDelete.setOnAction(event -> {
-            SalaryCalculation selected = (SalaryCalculation)salaryInfoTableview.getSelectionModel().getSelectedItem();
-            if(selected != null){
+            SalaryCalculation selected = (SalaryCalculation) salaryInfoTableview.getSelectionModel().getSelectedItem();
+            if (selected != null) {
                 salaryList.remove(selected);
                 salaryInfoTableview.getItems().remove(selected);
             }
@@ -300,14 +288,14 @@ public class GUI extends Application {
         salaryInfoTableview.setItems(salaryList);
 
         salaryInfoHbox.setSpacing(10);
-        salaryInfoHbox.getChildren().addAll(salaryInfoIdLabel, salaryInfoId, salaryInfoWeekLabel, salaryInfoWeeks, salaryInfoButton,salaryInfoDelete, salaryInfoTotalSalary, salaryInfoTotalSalaryLabel);
+        salaryInfoHbox.getChildren().addAll(salaryInfoIdLabel, salaryInfoId, salaryInfoWeekLabel, salaryInfoWeeks, salaryInfoButton, salaryInfoDelete, salaryInfoTotalSalary, salaryInfoTotalSalaryLabel);
         salaryInfoBorderPane.setLeft(salaryInfoHbox);
         salaryInfoBorderPane.setBottom(salaryInfoTableview);
         salaryInfo.setContent(salaryInfoBorderPane);
 
-        /**
-         *  Worker info
-         */
+
+        //TODO Worker information
+
         BorderPane workerInfoBorderpane = new BorderPane();
 
         TableView workerInfoTableView = new TableView();
@@ -338,15 +326,15 @@ public class GUI extends Application {
 
         workerInfoTotal.setOnAction(event -> {
             double totalSalary = 0;
-            for (Employee employee : employees){
+            for (Employee employee : employees) {
                 totalSalary += employee.getMonthlySalary();
             }
             totalSalaryCostLabel.setText("Total salary cost per month: €" + totalSalary);
         });
 
         workerInfoDelete.setOnAction(event -> {
-            Employee selectedEmployee = (Employee)workerInfoTableView.getSelectionModel().getSelectedItem();
-            if(selectedEmployee != null){
+            Employee selectedEmployee = (Employee) workerInfoTableView.getSelectionModel().getSelectedItem();
+            if (selectedEmployee != null) {
                 employees.remove(selectedEmployee);
                 workerInfoTableView.getItems().remove(selectedEmployee);
             }
@@ -357,9 +345,8 @@ public class GUI extends Application {
 
         workerInfo.setContent(workerInfoBorderpane);
 
-        /**
-         * search tab
-         */
+        //TODO search employee
+
         BorderPane searchBorderpane = new BorderPane();
         HBox searchHbox = new HBox();
         searchHbox.setSpacing(25);
@@ -384,31 +371,28 @@ public class GUI extends Application {
 
         searchButton.setOnAction(event -> {
             searchResults.clear();
-            switch ((String)searchComboBox.getValue()){
+            switch ((String) searchComboBox.getValue()) {
                 case "First name":
-                    for(Employee employee : employees){
-                        if (employee.getFirstName().toLowerCase().equals(searchTextfield.getText().toLowerCase())){
+                    for (Employee employee : employees) {
+                        if (employee.getFirstName().toLowerCase().equals(searchTextfield.getText().toLowerCase())) {
                             searchResults.add(employee);
                         }
                     }
                     break;
                 case "Last name":
-                    for (Employee employee : employees){
-                        if(employee.getLastName().toLowerCase().equals(searchTextfield.getText().toLowerCase())){
+                    for (Employee employee : employees) {
+                        if (employee.getLastName().toLowerCase().equals(searchTextfield.getText().toLowerCase())) {
                             searchResults.add(employee);
                         }
                     }
                     break;
-                case  "ID":
-                    for (Employee employee : employees){
-                        if (String.valueOf(employee.getID()).equals(searchTextfield.getText())){
+                case "ID":
+                    for (Employee employee : employees) {
+                        if (String.valueOf(employee.getID()).equals(searchTextfield.getText())) {
                             searchResults.add(employee);
                         }
                     }
                     break;
-            }
-            for (Employee employee : searchResults) {
-                System.out.println(employee.toString());
             }
         });
 
@@ -418,9 +402,7 @@ public class GUI extends Application {
         searchBorderpane.setTop(searchHbox);
         searchWorker.setContent(searchBorderpane);
 
-        /**
-         *  File reader tab
-         */
+        //TODO File reader
 
         DataReader dataReader = new DataReader();
         BorderPane fileReaderBorderpane = new BorderPane();
@@ -448,7 +430,7 @@ public class GUI extends Application {
 
         textSaveButton.setOnAction(event -> {
             String filename = "Employees" + LocalDate.now();
-            dataReader.saveDataToTextfile(filename,employees);
+            dataReader.saveDataToTextfile(filename, employees);
         });
 
         fileReaderBorderpane.setRight(readFileVbox);
@@ -456,9 +438,7 @@ public class GUI extends Application {
 
         fileReader.setContent(fileReaderBorderpane);
 
-        /**
-         *  Finalizing scene
-         */
+        //TODO Finalizing scene
 
         stage.setWidth(1300);
         Scene scene = new Scene(tabPane);

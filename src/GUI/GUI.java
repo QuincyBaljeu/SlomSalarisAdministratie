@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -261,30 +262,49 @@ public class GUI extends Application {
 
         addWorker.setContent(addWorkerBorderPane);
 
-
         /**
-         *  Salary info
+         *  Salary Info
          */
 
-        BorderPane salaryInfoBorderpane = new BorderPane();
 
-        TableView salaryInfoTableView = new TableView();
+        BorderPane salaryInfoBorderPane = new BorderPane();
+        ObservableList<Employee> salaryList = FXCollections.observableArrayList();
+        HBox salaryInfoHbox = new HBox();
+        Label salaryInfoIdLabel = new Label("Enter employee id");
+        Label salaryInfoWeekLabel = new Label("Amount of weeks");
+        TextField salaryInfoWeeks = new TextField();
+        TextField salaryInfoId = new TextField();
 
-        TableColumn salaryIdColumn = new TableColumn("Worker id");
-        TableColumn salaryLastNameColumn = new TableColumn("Last name");
-        TableColumn salarySalaryColumn = new TableColumn("Salary");
+        Button salaryInfoButton = new Button("Add employee");
 
-        salaryIdColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
-        salaryLastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        salarySalaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("salary"));
 
-        salaryInfoTableView.getColumns().addAll(salaryIdColumn, salaryLastNameColumn, salarySalaryColumn);
+        salaryInfoHbox.getChildren().addAll(salaryInfoIdLabel, salaryInfoId, salaryInfoWeekLabel, salaryInfoWeeks, salaryInfoButton);
+        salaryInfoBorderPane.setLeft(salaryInfoHbox);
+        salaryInfo.setContent(salaryInfoBorderPane);
 
-        salaryInfoTableView.setItems(employees);
+        /**
+         *  Worker info
+         */
 
-        salaryInfoBorderpane.setCenter(salaryInfoTableView);
+        BorderPane workerInfoBorderpane = new BorderPane();
 
-        salaryInfo.setContent(salaryInfoBorderpane);
+        TableView workerInfoTableView = new TableView();
+
+        TableColumn workerIdColumn = new TableColumn("Worker id");
+        TableColumn workerLastNameColumn = new TableColumn("Last name");
+        TableColumn workerSalaryColumn = new TableColumn("Salary");
+
+        workerIdColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
+        workerLastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        workerSalaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("salary"));
+
+        workerInfoTableView.getColumns().addAll(workerIdColumn, workerLastNameColumn, workerSalaryColumn);
+
+        workerInfoTableView.setItems(employees);
+
+        workerInfoBorderpane.setCenter(workerInfoTableView);
+
+        workerInfo.setContent(workerInfoBorderpane);
 
         /**
          * search tab
@@ -303,25 +323,27 @@ public class GUI extends Application {
 
         TableView searchResultTable = new TableView();
         TableColumn searchTableColumnId = new TableColumn("ID");
+        TableColumn searchTableColumnFirstName = new TableColumn("First name");
         TableColumn searchTableColumnLastName = new TableColumn("Last name");
 
+        searchTableColumnFirstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
         searchTableColumnLastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
         searchTableColumnId.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
-        searchResultTable.getColumns().addAll(searchTableColumnId, searchTableColumnLastName);
+        searchResultTable.getColumns().addAll(searchTableColumnId, searchTableColumnFirstName, searchTableColumnLastName);
 
         searchButton.setOnAction(event -> {
             searchResults.clear();
             switch ((String)searchComboBox.getValue()){
                 case "First name":
                     for(Employee employee : employees){
-                        if (employee.getFirstName().equals(searchTextfield.getText())){
+                        if (employee.getFirstName().toLowerCase().equals(searchTextfield.getText().toLowerCase())){
                             searchResults.add(employee);
                         }
                     }
                     break;
                 case "Last name":
                     for (Employee employee : employees){
-                        if(employee.getLastName().equals(searchTextfield.getText())){
+                        if(employee.getLastName().toLowerCase().equals(searchTextfield.getText().toLowerCase())){
                             searchResults.add(employee);
                         }
                     }

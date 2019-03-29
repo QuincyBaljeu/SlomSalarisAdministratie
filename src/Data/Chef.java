@@ -13,6 +13,12 @@ public class Chef extends Employee {
         this.position = position;
         this.bonus = bonus;
         this.bonusAssigned = bonusAssigned;
+        this.monthlySalary = getMonthlySalary();
+    }
+
+    @Override
+    public String getReaderString(){
+        return super.getReaderString() + "#" + this.bonus + "#" + this.bonusAssigned;
     }
 
     @Override
@@ -22,6 +28,7 @@ public class Chef extends Employee {
                 + "Bonus assigned: " + this.bonusAssigned;
     }
 
+    @Override
     public double getMonthlySalary() {
         double monthlySalary;
         if (this.bonusAssigned) {

@@ -10,8 +10,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -190,15 +194,15 @@ public class GUI extends Application {
 
         TableView salaryInfoTableView = new TableView();
 
-        TableColumn idColumn = new TableColumn("Worker id");
-        TableColumn lastNameColumn = new TableColumn("Last name");
-        TableColumn salaryColumn = new TableColumn("Salary");
+        TableColumn salaryIdColumn = new TableColumn("Worker id");
+        TableColumn salaryLastNameColumn = new TableColumn("Last name");
+        TableColumn salarySalaryColumn = new TableColumn("Salary");
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
-        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        salaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("salary"));
+        salaryIdColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
+        salaryLastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        salarySalaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("salary"));
 
-        salaryInfoTableView.getColumns().addAll(idColumn, lastNameColumn, salaryColumn);
+        salaryInfoTableView.getColumns().addAll(salaryIdColumn, salaryLastNameColumn, salarySalaryColumn);
 
         salaryInfoTableView.setItems(employees);
 
@@ -222,34 +226,44 @@ public class GUI extends Application {
         searchHbox.getChildren().addAll(searchTextfield, searchComboBox, searchButton);
 
         TableView searchResultTable = new TableView();
+        TableColumn searchTableColumnId = new TableColumn("ID");
+        TableColumn searchTableColumnLastName = new TableColumn("Last name");
+
+        searchTableColumnLastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        searchTableColumnId.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
+        searchResultTable.getColumns().addAll(searchTableColumnId, searchTableColumnLastName);
 
         searchButton.setOnAction(event -> {
-           // searchResults.clear();
-            switch (searchComboBox.getValue().toString()){
+            searchResults.clear();
+            switch ((String)searchComboBox.getValue()){
                 case "First name":
                     for(Employee employee : employees){
-                        if (employee.getFirstName().equals(searchTextfield.toString())){
+                        if (employee.getFirstName().equals(searchTextfield.getText())){
                             searchResults.add(employee);
                         }
                     }
                     break;
                 case "Last name":
                     for (Employee employee : employees){
-                        if(employee.getLastName().equals(searchTextfield.toString())){
+                        if(employee.getLastName().equals(searchTextfield.getText())){
                             searchResults.add(employee);
                         }
                     }
                     break;
                 case  "ID":
                     for (Employee employee : employees){
-                        if (String.valueOf(employee.getID()).equals(searchTextfield.toString())){
+                        if (String.valueOf(employee.getID()).equals(searchTextfield.getText())){
                             searchResults.add(employee);
                         }
                     }
                     break;
             }
-
+            for (Employee employee : searchResults) {
+                System.out.println(employee.toString());
+            }
         });
+
+        searchResultTable.setItems(searchResults);
 
         searchBorderpane.setCenter(searchResultTable);
         searchBorderpane.setTop(searchHbox);
@@ -278,6 +292,24 @@ public class GUI extends Application {
 
         readFileVbox.getChildren().addAll(fileRead, textReadButton, objectIoReadButton);
         saveFileVbox.getChildren().addAll(fileSave, textSaveButton, objectIoSaveButton);
+
+        FileChooser fileChooser = new FileChooser();
+        textReadButton.setOnAction(event -> {
+            File file = fileChooser.showOpenDialog(null);
+            dataReader.readDataFromTextfile(file, employees);
+        });
+
+        objectIoReadButton.setOnAction(event -> {
+            File file = fileChooser.showOpenDialog(null);
+        });
+
+        textSaveButton.setOnAction(event -> {
+            String filename = "Employees" + LocalDate.now();
+            dataReader.saveDataToTextfile(filename,employees);
+        });
+
+        objectIoSaveButton.setOnAction(event -> {
+        });
 
         fileReaderBorderpane.setRight(readFileVbox);
         fileReaderBorderpane.setLeft(saveFileVbox);

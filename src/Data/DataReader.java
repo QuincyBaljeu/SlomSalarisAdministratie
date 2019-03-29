@@ -19,60 +19,50 @@ public class DataReader {
         }
 
         while (scanner.hasNextLine()){
-            String employeeString = scanner.nextLine();
-            Scanner employeeScanner = new Scanner(employeeString);
-            employeeScanner.useDelimiter("#");
-
-            while (employeeScanner.hasNext()){
-                String position = employeeScanner.next();
-                int ID = employeeScanner.nextInt();
-                String firstName = employeeScanner.next();
-                String lastName = employeeScanner.next();
-                double salary = employeeScanner.nextDouble();
-
+            String employee = scanner.nextLine();
+            String[] employeeDetails = employee.split("#");
+            String position = employeeDetails [0];
                 switch(position){
                     case "Chef":
-//                        int ID = employeeScanner.nextInt();
-//                        String firstName = employeeScanner.next();
-//                        String lastName = employeeScanner.next();
-//                        double salary = employeeScanner.nextDouble();
-                        double bonus = employeeScanner.nextDouble();
-                        boolean bonusAssigned = employeeScanner.hasNextBoolean();
+                        int ID = Integer.valueOf(employeeDetails[1]);
+                        String firstName = employeeDetails[2];
+                        String lastName = employeeDetails[3];
+                        Double salary = Double.valueOf(employeeDetails[4]);
+                        Double bonus = Double.valueOf(employeeDetails[5]);
+                        Boolean bonusAssigned = Boolean.valueOf(employeeDetails[6]);
 
                         employees.add(new Chef(ID, firstName, lastName, salary, position, bonus, bonusAssigned));
                         break;
-
                     case "Commission worker":
-//                        ID = employeeScanner.nextInt();
-//                        firstName = employeeScanner.next();
-//                        lastName = employeeScanner.next();
-//                        salary = employeeScanner.nextDouble();
-//                        int amountOfCommissions = scanner.nextInt();
-                        System.out.println(scanner.next());
-//
-//                        employees.add(new CommissionWorker(ID, firstName, lastName, salary, position, amountOfCommissions));
+                        ID = Integer.valueOf(employeeDetails[1]);
+                        firstName = employeeDetails[2];
+                        lastName = employeeDetails[3];
+                        salary = Double.valueOf(employeeDetails[4]);
+                        int amountOfCommissions = Integer.valueOf(employeeDetails[5]);
+
+                        employees.add(new CommissionWorker(ID, firstName, lastName, salary, position, amountOfCommissions));
                         break;
 
                     case "Hour worker":
-//                        ID = employeeScanner.nextInt();
-//                        firstName = employeeScanner.next();
-//                        lastName = employeeScanner.next();
-//                        salary = employeeScanner.nextDouble();
-                        int hoursWorked = employeeScanner.nextInt();
+                        ID = Integer.valueOf(employeeDetails[1]);
+                        firstName = employeeDetails[2];
+                        lastName = employeeDetails[3];
+                        salary = Double.valueOf(employeeDetails[4]);
+                        int hoursWorked = Integer.valueOf(employeeDetails[5]);
 
                         employees.add(new HourWorker(ID, firstName, lastName, salary, position, hoursWorked));
                         break;
 
                     case "Piece worker":
-//                        ID = employeeScanner.nextInt();
-//                        firstName = employeeScanner.next();
-//                        lastName = employeeScanner.next();
-//                        salary = employeeScanner.nextDouble();
-                        int amountOfPieces = employeeScanner.nextInt();
+                        ID = Integer.valueOf(employeeDetails[1]);
+                        firstName = employeeDetails[2];
+                        lastName = employeeDetails[3];
+                        salary = Double.valueOf(employeeDetails[4]);
+                        int amountOfPieces = Integer.valueOf(employeeDetails[5]);
+
 
                         employees.add(new PieceWorker(ID, firstName, lastName, salary, position, amountOfPieces));
                         break;
-                }
             }
         }
     }

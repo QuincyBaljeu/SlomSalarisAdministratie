@@ -1,4 +1,0 @@
-Chef#67451#Kerry#King#2000.0#100.0#false
-Chef#89654#Tom#Araya#2000.0#100.0#true
-Commission worker#78562#Dave#Lombardo#1000.0#500
-Commission worker#78563#Gary#Holt#1000.0#300

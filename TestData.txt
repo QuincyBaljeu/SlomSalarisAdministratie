@@ -1,0 +1,12 @@
+Chef#89654#Tom#Araya#2000.0#100.0#true
+Chef#67451#Kerry#King#2000.0#100.0#false
+Commission worker#78562#Dave#Lombardo#1000.0#500
+Commission worker#78563#Gary#Holt#1000.0#300
+Commission worker#59614#Frank#Bello#1000.0#200
+Hour worker#4725#Kirk#Hammett#25.0#150
+Hour worker#52964#Scott#Ian#20.0#160
+Hour worker#67459#James#Hetfield#20.0#144
+Piece worker#67453#Lars#Ulrich#0.0#500
+Piece worker#73562#Robert#Trujilo#0.0#300
+Piece worker#5674#Kerry#Queen#0.0#50
+Chef#78596#Charlie#Benante#3000.0#500.0#false

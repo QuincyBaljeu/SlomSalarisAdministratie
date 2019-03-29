@@ -319,17 +319,20 @@ public class GUI extends Application {
         Button workerInfoDelete = new Button("Delete Employee");
         workerInfoTotalHbox.getChildren().addAll(workerInfoDelete, workerInfoTotal, totalSalaryCostLabel);
 
+        TableColumn workerPosition = new TableColumn("Position");
         TableColumn workerIdColumn = new TableColumn("ID");
         TableColumn workerFirstName = new TableColumn("First name");
         TableColumn workerLastNameColumn = new TableColumn("Last name");
         TableColumn workerSalaryColumn = new TableColumn("Salary");
 
+        workerPosition.setCellValueFactory(new PropertyValueFactory<Employee, String>("position"));
+        workerPosition.setPrefWidth(160);
         workerIdColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
         workerFirstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
         workerLastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
         workerSalaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("monthlySalary"));
 
-        workerInfoTableView.getColumns().addAll(workerIdColumn, workerFirstName, workerLastNameColumn, workerSalaryColumn);
+        workerInfoTableView.getColumns().addAll(workerPosition, workerIdColumn, workerFirstName, workerLastNameColumn, workerSalaryColumn);
 
         workerInfoTableView.setItems(employees);
 

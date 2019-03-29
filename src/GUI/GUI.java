@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -45,15 +44,21 @@ public class GUI extends Application {
          * add Worker
          */
 
+        Alert emptyFieldAlert = new Alert(Alert.AlertType.ERROR);
+        emptyFieldAlert.setTitle("Empty text field");
+        emptyFieldAlert.setHeaderText(null);
+        emptyFieldAlert.setContentText("Please enter all text fields");
+
+
         VBox componentVbox = new VBox();
         BorderPane addWorkerBorderPane = new BorderPane();
 
         //Components ID
-        Label IDLabel = new Label("Worker ID: ");
+        Label IDLabel = new Label("Employee ID: ");
         TextField IDTextField = new TextField();
         HBox IDHbox = new HBox();
         textFields.add(IDTextField);
-        IDHbox.setSpacing(200);
+        IDHbox.setSpacing(185);
         IDHbox.getChildren().addAll(IDLabel, IDTextField);
 
         //components first name
@@ -108,35 +113,8 @@ public class GUI extends Application {
 
         //components general
         Button confirmData = new Button("Confirm data");
-        Button print = new Button("Print");
-
-        Alert emptyFieldAlert = new Alert(Alert.AlertType.ERROR);
-        emptyFieldAlert.setTitle("Error");
-        emptyFieldAlert.setHeaderText(null);
-        emptyFieldAlert.setContentText("Please enter all text fields");
-
-        Alert IDInvalidIntAlert = new Alert(Alert.AlertType.ERROR);
-        IDInvalidIntAlert.setTitle("Error");
-        IDInvalidIntAlert.setHeaderText(null);
-        IDInvalidIntAlert.setContentText("Please enter a number in ID field");
-
-        Alert salaryInvalidIntAlert = new Alert(Alert.AlertType.ERROR);
-        salaryInvalidIntAlert.setTitle("Error");
-        salaryInvalidIntAlert.setHeaderText(null);
-        salaryInvalidIntAlert.setContentText("Please enter a number in salary field");
-
-        Alert firstNameInvalidStringAlert = new Alert(Alert.AlertType.ERROR);
-        firstNameInvalidStringAlert.setTitle("Error");
-        firstNameInvalidStringAlert.setHeaderText(null);
-        firstNameInvalidStringAlert.setContentText("Please enter a name in first name field");
-
-        Alert lastNameInvalidStringAlert = new Alert(Alert.AlertType.ERROR);
-        lastNameInvalidStringAlert.setTitle("Error");
-        lastNameInvalidStringAlert.setHeaderText(null);
-        lastNameInvalidStringAlert.setContentText("Please enter a name in last name field");
 
         confirmData.setOnAction(event -> {
-            //TODO Add invalid input type errors
             for (TextField textField : textFields) {
                 if (textField.getText().isEmpty()) {
                     emptyFieldAlert.showAndWait();
@@ -144,147 +122,240 @@ public class GUI extends Application {
                 }
             }
 
-            switch (positionComboBox.getValue().toString()) {
-                case "Chef":
-                    Boolean idInUse = false;
-                    for (Employee employee : employees) {
-                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
-                            idInUse = true;
-                            break;
+            try {
+                switch (positionComboBox.getValue().toString()) {
+                    case "Chef":
+                        Boolean idInUse = false;
+                        for (Employee employee : employees) {
+                            if (employee.getID() == Integer.parseInt(IDTextField.getText())) {
+                                idInUse = true;
+                                break;
+                            }
                         }
-                    }
 
-                    if(!idInUse){
-                        employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
-                                firstNameTextField.getText(),
-                                lastNameTextField.getText(),
-                                Double.parseDouble(salaryTextField.getText()),
-                                "Chef",
-                                Double.valueOf(extraInfoTextField.getText()),
-                                bonusAssignedCheckbox.isSelected()));
-                    } else {
-                        System.out.println("in use");
-                    }
-
-                    //TODO assign text field value to bonus and assigned bonus
-
-                    break;
-
-                case "Commission worker":
-                    idInUse = false;
-                    for (Employee employee : employees) {
-                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
-                            idInUse = true;
-                            break;
+                        if (!idInUse) {
+                            employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
+                                    firstNameTextField.getText(),
+                                    lastNameTextField.getText(),
+                                    Double.parseDouble(salaryTextField.getText()),
+                                    "Chef",
+                                    Double.valueOf(extraInfoTextField.getText()),
+                                    bonusAssignedCheckbox.isSelected()));
+                        } else {
+                            System.out.println("in use");
                         }
-                    }
+                        break;
 
-                    if(!idInUse){
-                        employees.add(new CommissionWorker(Integer.parseInt(IDTextField.getText()),
-                                firstNameTextField.getText(),
-                                lastNameTextField.getText(),
-                                Double.parseDouble(salaryTextField.getText()),
-                                "Commission worker",
-                                Integer.valueOf(extraInfoTextField.getText())
-                        ));
-                    } else {
-                        System.out.println("in use");
-                    }
-                    //TODO assign text field value to amountOfCommissions
-                    break;
-                case "Hour worker":
-                    idInUse = false;
-                    for (Employee employee : employees) {
-                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
-                            idInUse = true;
-                            break;
+                    case "Commission worker":
+                        idInUse = false;
+                        for (Employee employee : employees) {
+                            if (employee.getID() == Integer.parseInt(IDTextField.getText())) {
+                                idInUse = true;
+                                break;
+                            }
                         }
-                    }
 
-                    if(!idInUse){
-                        employees.add(new HourWorker(Integer.parseInt(IDTextField.getText()),
-                                firstNameTextField.getText(),
-                                lastNameTextField.getText(),
-                                Double.parseDouble(salaryTextField.getText()),
-                                "Hour worker",
-                                Integer.valueOf(extraInfoTextField.getText())
-                        ));
-                    } else {
-                        System.out.println("in use");
-                    }
-                    //TODO assign text field value to hoursWorked
-
-                    break;
-                case "Piece worker":
-                    idInUse = false;
-                    for (Employee employee : employees) {
-                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
-                            idInUse = true;
-                            break;
+                        if (!idInUse) {
+                            employees.add(new CommissionWorker(Integer.parseInt(IDTextField.getText()),
+                                    firstNameTextField.getText(),
+                                    lastNameTextField.getText(),
+                                    Double.parseDouble(salaryTextField.getText()),
+                                    "Commission worker",
+                                    Integer.valueOf(extraInfoTextField.getText())
+                            ));
+                        } else {
+                            System.out.println("in use");
                         }
-                    }
 
-                    if(!idInUse){
-                        employees.add(new PieceWorker(Integer.parseInt(IDTextField.getText()),
-                                firstNameTextField.getText(),
-                                lastNameTextField.getText(),
-                                Double.parseDouble(salaryTextField.getText()),
-                                "Piece worker",
-                                Integer.valueOf(extraInfoTextField.getText())
-                        ));
-                    } else {
-                        System.out.println("in use");
-                    }
-                    //TODO assign text field value to amountOfPieces
-                    break;
+                        break;
+                    case "Hour worker":
+                        idInUse = false;
+                        for (Employee employee : employees) {
+                            if (employee.getID() == Integer.parseInt(IDTextField.getText())) {
+                                idInUse = true;
+                                break;
+                            }
+                        }
+
+                        if (!idInUse) {
+                            employees.add(new HourWorker(Integer.parseInt(IDTextField.getText()),
+                                    firstNameTextField.getText(),
+                                    lastNameTextField.getText(),
+                                    Double.parseDouble(salaryTextField.getText()),
+                                    "Hour worker",
+                                    Integer.valueOf(extraInfoTextField.getText())
+                            ));
+                        } else {
+                            System.out.println("in use");
+                        }
+
+                        break;
+                    case "Piece worker":
+                        idInUse = false;
+                        for (Employee employee : employees) {
+                            if (employee.getID() == Integer.parseInt(IDTextField.getText())) {
+                                idInUse = true;
+                                break;
+                            }
+                        }
+
+                        if (!idInUse) {
+                            employees.add(new PieceWorker(Integer.parseInt(IDTextField.getText()),
+                                    firstNameTextField.getText(),
+                                    lastNameTextField.getText(),
+                                    Double.parseDouble(salaryTextField.getText()),
+                                    "Piece worker",
+                                    Integer.valueOf(extraInfoTextField.getText())
+                            ));
+                        } else {
+                            System.out.println("in use");
+                        }
+                        break;
+                }
+            } catch (NullPointerException e){
+                emptyFieldAlert.showAndWait();
+            } catch (NumberFormatException e){
+                System.out.println("Invalid input");
             }
 
             for (TextField textField : textFields){
                 textField.setText("");
             }
 
-            print.setOnAction(event1 -> {
-                double totalSalary = 0;
-                for (Employee employee : employees) {
-                    System.out.println(employee.toString() + "\n");
-                    totalSalary += employee.getSalary();
-                }
-                System.out.println("Total monthly salary: " + totalSalary);
-            });
+//            print.setOnAction(event1 -> {
+//                double totalSalary = 0;
+//                for (Employee employee : employees) {
+//                    System.out.println(employee.toString() + "\n");
+//                    totalSalary += employee.getSalary();
+//                }
+//                System.out.println("Total monthly salary: " + totalSalary);
+//            });
         });
 
         //finalizing scene
         componentVbox.setSpacing(5);
-        componentVbox.getChildren().addAll( positionHbox, IDHbox, firstNameHbox, lastNameHbox, salaryHbox, extraInfoHbox, bonusAssignedHbox, confirmData);
+        componentVbox.getChildren().addAll(positionHbox, IDHbox, firstNameHbox, lastNameHbox, salaryHbox, extraInfoHbox, bonusAssignedHbox, confirmData);
 
         addWorkerBorderPane.setLeft(componentVbox);
 
         addWorker.setContent(addWorkerBorderPane);
 
-
         /**
-         *  Salary info
+         *  Salary Info
          */
 
-        BorderPane salaryInfoBorderpane = new BorderPane();
+        BorderPane salaryInfoBorderPane = new BorderPane();
+        ObservableList<SalaryCalculation> salaryList = FXCollections.observableArrayList();
+        HBox salaryInfoHbox = new HBox();
+        Label salaryInfoIdLabel = new Label("Enter employee id");
+        Label salaryInfoWeekLabel = new Label("Amount of weeks");
+        Label salaryInfoTotalSalaryLabel = new Label("");
+        TextField salaryInfoWeeks = new TextField();
+        TextField salaryInfoId = new TextField();
+        Button salaryInfoButton = new Button("Add employee");
+        Button salaryInfoTotalSalary = new Button("Total salary this period");
+        Button salaryInfoDelete = new Button("Delete");
 
-        TableView salaryInfoTableView = new TableView();
+        TableView salaryInfoTableview = new TableView();
 
-        TableColumn salaryIdColumn = new TableColumn("Worker id");
-        TableColumn salaryLastNameColumn = new TableColumn("Last name");
-        TableColumn salarySalaryColumn = new TableColumn("Salary");
+        TableColumn salaryInfoIDColumn = new TableColumn("ID");
+        TableColumn salaryInfoLastNameColumn = new TableColumn("Last name");
+        TableColumn salaryInfoSalaryColumn = new TableColumn("Salary");
 
-        salaryIdColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
-        salaryLastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        salarySalaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("salary"));
+        salaryInfoIDColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
+        salaryInfoLastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        salaryInfoSalaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("salary"));
 
-        salaryInfoTableView.getColumns().addAll(salaryIdColumn, salaryLastNameColumn, salarySalaryColumn);
+        salaryInfoTableview.getColumns().addAll(salaryInfoIDColumn, salaryInfoLastNameColumn, salaryInfoSalaryColumn);
 
-        salaryInfoTableView.setItems(employees);
+        salaryInfoButton.setOnAction(event -> {
+            for (Employee employee : employees){
+                if(Integer.valueOf(salaryInfoId.getText()) == employee.getID()){
+                    double salary = (employee.getMonthlySalary()/4) * Integer.valueOf(salaryInfoWeeks.getText());
+                    salaryList.add(new SalaryCalculation(Integer.valueOf(salaryInfoId.getText()), employee.getLastName(), salary));
+                }
+            }
 
-        salaryInfoBorderpane.setCenter(salaryInfoTableView);
+            for (SalaryCalculation salaryCalculation : salaryList) {
+                System.out.println(salaryCalculation.getID());
+            }
+        });
 
-        salaryInfo.setContent(salaryInfoBorderpane);
+        salaryInfoTotalSalary.setOnAction(event -> {
+            double totalSalary = 0;
+            for(SalaryCalculation calculation : salaryList){
+                totalSalary += calculation.getSalary();
+            }
+            salaryInfoTotalSalaryLabel.setText("€" + totalSalary);
+        });
+
+        salaryInfoDelete.setOnAction(event -> {
+            SalaryCalculation selected = (SalaryCalculation)salaryInfoTableview.getSelectionModel().getSelectedItem();
+            if(selected != null){
+                salaryList.remove(selected);
+                salaryInfoTableview.getItems().remove(selected);
+            }
+        });
+
+        salaryInfoTableview.setItems(salaryList);
+
+        salaryInfoHbox.setSpacing(10);
+        salaryInfoHbox.getChildren().addAll(salaryInfoIdLabel, salaryInfoId, salaryInfoWeekLabel, salaryInfoWeeks, salaryInfoButton,salaryInfoDelete, salaryInfoTotalSalary, salaryInfoTotalSalaryLabel);
+        salaryInfoBorderPane.setLeft(salaryInfoHbox);
+        salaryInfoBorderPane.setBottom(salaryInfoTableview);
+        salaryInfo.setContent(salaryInfoBorderPane);
+
+        /**
+         *  Worker info
+         */
+        BorderPane workerInfoBorderpane = new BorderPane();
+
+        TableView workerInfoTableView = new TableView();
+
+        HBox workerInfoTotalHbox = new HBox();
+        workerInfoTotalHbox.setSpacing(20);
+        Button workerInfoTotal = new Button("Total cost");
+        Label totalSalaryCostLabel = new Label("");
+        Button workerInfoDelete = new Button("Delete Employee");
+        workerInfoTotalHbox.getChildren().addAll(workerInfoDelete, workerInfoTotal, totalSalaryCostLabel);
+
+        TableColumn workerPosition = new TableColumn("Position");
+        TableColumn workerIdColumn = new TableColumn("ID");
+        TableColumn workerFirstName = new TableColumn("First name");
+        TableColumn workerLastNameColumn = new TableColumn("Last name");
+        TableColumn workerSalaryColumn = new TableColumn("Salary");
+
+        workerPosition.setCellValueFactory(new PropertyValueFactory<Employee, String>("position"));
+        workerPosition.setPrefWidth(160);
+        workerIdColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
+        workerFirstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
+        workerLastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        workerSalaryColumn.setCellValueFactory(new PropertyValueFactory<Employee, Double>("monthlySalary"));
+
+        workerInfoTableView.getColumns().addAll(workerPosition, workerIdColumn, workerFirstName, workerLastNameColumn, workerSalaryColumn);
+
+        workerInfoTableView.setItems(employees);
+
+        workerInfoTotal.setOnAction(event -> {
+            double totalSalary = 0;
+            for (Employee employee : employees){
+                totalSalary += employee.getMonthlySalary();
+            }
+            totalSalaryCostLabel.setText("Total salary cost per month: €" + totalSalary);
+        });
+
+        workerInfoDelete.setOnAction(event -> {
+            Employee selectedEmployee = (Employee)workerInfoTableView.getSelectionModel().getSelectedItem();
+            if(selectedEmployee != null){
+                employees.remove(selectedEmployee);
+                workerInfoTableView.getItems().remove(selectedEmployee);
+            }
+        });
+
+        workerInfoBorderpane.setTop(workerInfoTotalHbox);
+        workerInfoBorderpane.setBottom(workerInfoTableView);
+
+        workerInfo.setContent(workerInfoBorderpane);
 
         /**
          * search tab
@@ -303,25 +374,27 @@ public class GUI extends Application {
 
         TableView searchResultTable = new TableView();
         TableColumn searchTableColumnId = new TableColumn("ID");
+        TableColumn searchTableColumnFirstName = new TableColumn("First name");
         TableColumn searchTableColumnLastName = new TableColumn("Last name");
 
+        searchTableColumnFirstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
         searchTableColumnLastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
         searchTableColumnId.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("ID"));
-        searchResultTable.getColumns().addAll(searchTableColumnId, searchTableColumnLastName);
+        searchResultTable.getColumns().addAll(searchTableColumnId, searchTableColumnFirstName, searchTableColumnLastName);
 
         searchButton.setOnAction(event -> {
             searchResults.clear();
             switch ((String)searchComboBox.getValue()){
                 case "First name":
                     for(Employee employee : employees){
-                        if (employee.getFirstName().equals(searchTextfield.getText())){
+                        if (employee.getFirstName().toLowerCase().equals(searchTextfield.getText().toLowerCase())){
                             searchResults.add(employee);
                         }
                     }
                     break;
                 case "Last name":
                     for (Employee employee : employees){
-                        if(employee.getLastName().equals(searchTextfield.getText())){
+                        if(employee.getLastName().toLowerCase().equals(searchTextfield.getText().toLowerCase())){
                             searchResults.add(employee);
                         }
                     }
@@ -355,8 +428,6 @@ public class GUI extends Application {
         //Text io
         Button textReadButton = new Button("Read data from text file");
         Button textSaveButton = new Button("Save data to text file");
-        Button objectIoReadButton = new Button("Read data from object file");
-        Button objectIoSaveButton = new Button("Save data to object file");
 
         Label fileRead = new Label("Read data");
         Label fileSave = new Label("Save data");
@@ -366,8 +437,8 @@ public class GUI extends Application {
         readFileVbox.setSpacing(15);
         saveFileVbox.setSpacing(15);
 
-        readFileVbox.getChildren().addAll(fileRead, textReadButton, objectIoReadButton);
-        saveFileVbox.getChildren().addAll(fileSave, textSaveButton, objectIoSaveButton);
+        readFileVbox.getChildren().addAll(fileRead, textReadButton);
+        saveFileVbox.getChildren().addAll(fileSave, textSaveButton);
 
         FileChooser fileChooser = new FileChooser();
         textReadButton.setOnAction(event -> {
@@ -375,16 +446,9 @@ public class GUI extends Application {
             dataReader.readDataFromTextfile(file, employees);
         });
 
-        objectIoReadButton.setOnAction(event -> {
-            File file = fileChooser.showOpenDialog(null);
-        });
-
         textSaveButton.setOnAction(event -> {
             String filename = "Employees" + LocalDate.now();
             dataReader.saveDataToTextfile(filename,employees);
-        });
-
-        objectIoSaveButton.setOnAction(event -> {
         });
 
         fileReaderBorderpane.setRight(readFileVbox);
@@ -396,6 +460,7 @@ public class GUI extends Application {
          *  Finalizing scene
          */
 
+        stage.setWidth(1300);
         Scene scene = new Scene(tabPane);
         stage.setScene(scene);
         stage.show();

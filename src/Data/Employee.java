@@ -7,6 +7,7 @@ public abstract class Employee {
     protected String lastName;
     protected double salary;
     protected String position;
+    protected double monthlySalary;
 
     public String toString() {
         return "ID: " + this.ID + "\n"
@@ -58,5 +59,9 @@ public abstract class Employee {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public double getMonthlySalary(){
+        return this.salary;
     }
 }

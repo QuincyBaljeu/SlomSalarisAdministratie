@@ -1,4 +1,0 @@
-Commission worker#456#Kerry#King#5000.46#10
-Chef#123#Tom#Araya#3451.01#10.0#true
-Hour worker#789#Gary#Holt#987.89#123
-Piece worker#873#Dave#Lombardo#13.5#123

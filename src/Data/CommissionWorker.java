@@ -11,6 +11,7 @@ public class CommissionWorker extends Employee {
         this.salary = salary;
         this.position = position;
         this.amountOfCommissions = amountOfCommissions;
+        this.monthlySalary = getMonthlySalary();
     }
 
     @Override
@@ -24,9 +25,10 @@ public class CommissionWorker extends Employee {
                 + "Amount of commissions: " + this.amountOfCommissions;
     }
 
+    @Override
     public double getMonthlySalary() {
         double bonus = Math.floor((amountOfCommissions / 100)) * (0.10 * salary);
-        double monthlySalary = salary + bonus;
-        return monthlySalary;
+        double monthSalary = salary + bonus;
+        return monthSalary;
     }
 }

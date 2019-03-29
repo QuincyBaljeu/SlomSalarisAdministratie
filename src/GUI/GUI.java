@@ -45,36 +45,66 @@ public class GUI extends Application {
          * add Worker
          */
 
-        VBox labelVbox = new VBox();
-        VBox textFieldVbox = new VBox();
-        HBox hBox = new HBox();
-
+        VBox componentVbox = new VBox();
         BorderPane addWorkerBorderPane = new BorderPane();
 
         //Components ID
         Label IDLabel = new Label("Worker ID: ");
         TextField IDTextField = new TextField();
+        HBox IDHbox = new HBox();
         textFields.add(IDTextField);
+        IDHbox.setSpacing(200);
+        IDHbox.getChildren().addAll(IDLabel, IDTextField);
 
         //components first name
         Label firstNameLabel = new Label("First name: ");
         TextField firstNameTextField = new TextField();
+        HBox firstNameHbox = new HBox();
         textFields.add(firstNameTextField);
+        firstNameHbox.setSpacing(200);
+        firstNameHbox.getChildren().addAll(firstNameLabel, firstNameTextField);
 
         //components last name
         Label lastNameLabel = new Label("Last name: ");
         TextField lastNameTextField = new TextField();
+        HBox lastNameHbox = new HBox();
         textFields.add(lastNameTextField);
+        lastNameHbox.setSpacing(200);
+        lastNameHbox.getChildren().addAll(lastNameLabel, lastNameTextField);
 
         //components salary
         Label salaryLabel = new Label("Salary: ");
         TextField salaryTextField = new TextField();
+        HBox salaryHbox = new HBox();
         textFields.add(salaryTextField);
+        salaryHbox.setSpacing(225);
+        salaryHbox.getChildren().addAll(salaryLabel, salaryTextField);
 
         //components position
         Label positionLabel = new Label("Position: ");
-        ComboBox comboBox = new ComboBox();
-        comboBox.getItems().addAll("Chef", "Commission worker", "Hour worker", "Piece worker");
+        ComboBox positionComboBox = new ComboBox();
+        HBox positionHbox = new HBox();
+        positionComboBox.getItems().addAll("Chef", "Commission worker", "Hour worker", "Piece worker");
+        positionHbox.setSpacing(213);
+        positionHbox.getChildren().addAll(positionLabel, positionComboBox);
+
+        //components extra
+        Label extraInfoLabel = new Label("Bonus: " + "\n" +
+                                        "Amount of commissions: " + "\n" +
+                                        "Hours Worked: " + "\n" +
+                                        "Amount of Pieces: ");
+        TextField extraInfoTextField = new TextField();
+        HBox extraInfoHbox = new HBox();
+        textFields.add(extraInfoTextField);
+        extraInfoHbox.setSpacing(113);
+        extraInfoHbox.getChildren().addAll(extraInfoLabel, extraInfoTextField);
+
+        //components bonus
+        Label bonusAssignedLabel = new Label("Bonus assigned: ");
+        CheckBox bonusAssignedCheckbox = new CheckBox();
+        HBox bonusAssignedHbox = new HBox();
+        bonusAssignedHbox.setSpacing(200);
+        bonusAssignedHbox.getChildren().addAll(bonusAssignedLabel, bonusAssignedCheckbox);
 
         //components general
         Button confirmData = new Button("Confirm data");
@@ -114,47 +144,98 @@ public class GUI extends Application {
                 }
             }
 
-            switch (comboBox.getValue().toString()) {
+            switch (positionComboBox.getValue().toString()) {
                 case "Chef":
+                    Boolean idInUse = false;
+                    for (Employee employee : employees) {
+                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
+                            idInUse = true;
+                            break;
+                        }
+                    }
+
+                    if(!idInUse){
+                        employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
+                                firstNameTextField.getText(),
+                                lastNameTextField.getText(),
+                                Double.parseDouble(salaryTextField.getText()),
+                                "Chef",
+                                Double.valueOf(extraInfoTextField.getText()),
+                                bonusAssignedCheckbox.isSelected()));
+                    } else {
+                        System.out.println("in use");
+                    }
+
                     //TODO assign text field value to bonus and assigned bonus
-                    employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
-                            firstNameTextField.getText(),
-                            lastNameTextField.getText(),
-                            Double.parseDouble(salaryTextField.getText()),
-                            "Chef",
-                            10.0,
-                            true));
+
                     break;
 
                 case "Commission worker":
+                    idInUse = false;
+                    for (Employee employee : employees) {
+                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
+                            idInUse = true;
+                            break;
+                        }
+                    }
+
+                    if(!idInUse){
+                        employees.add(new CommissionWorker(Integer.parseInt(IDTextField.getText()),
+                                firstNameTextField.getText(),
+                                lastNameTextField.getText(),
+                                Double.parseDouble(salaryTextField.getText()),
+                                "Commission worker",
+                                Integer.valueOf(extraInfoTextField.getText())
+                        ));
+                    } else {
+                        System.out.println("in use");
+                    }
                     //TODO assign text field value to amountOfCommissions
-                    employees.add(new CommissionWorker(Integer.parseInt(IDTextField.getText()),
-                            firstNameTextField.getText(),
-                            lastNameTextField.getText(),
-                            Double.parseDouble(salaryTextField.getText()),
-                            "Commission worker",
-                            10
-                    ));
                     break;
                 case "Hour worker":
+                    idInUse = false;
+                    for (Employee employee : employees) {
+                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
+                            idInUse = true;
+                            break;
+                        }
+                    }
+
+                    if(!idInUse){
+                        employees.add(new HourWorker(Integer.parseInt(IDTextField.getText()),
+                                firstNameTextField.getText(),
+                                lastNameTextField.getText(),
+                                Double.parseDouble(salaryTextField.getText()),
+                                "Hour worker",
+                                Integer.valueOf(extraInfoTextField.getText())
+                        ));
+                    } else {
+                        System.out.println("in use");
+                    }
                     //TODO assign text field value to hoursWorked
-                    employees.add(new HourWorker(Integer.parseInt(IDTextField.getText()),
-                            firstNameTextField.getText(),
-                            lastNameTextField.getText(),
-                            Double.parseDouble(salaryTextField.getText()),
-                            "Hour worker",
-                            123
-                    ));
+
                     break;
                 case "Piece worker":
+                    idInUse = false;
+                    for (Employee employee : employees) {
+                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
+                            idInUse = true;
+                            break;
+                        }
+                    }
+
+                    if(!idInUse){
+                        employees.add(new PieceWorker(Integer.parseInt(IDTextField.getText()),
+                                firstNameTextField.getText(),
+                                lastNameTextField.getText(),
+                                Double.parseDouble(salaryTextField.getText()),
+                                "Piece worker",
+                                Integer.valueOf(extraInfoTextField.getText())
+                        ));
+                    } else {
+                        System.out.println("in use");
+                    }
                     //TODO assign text field value to amountOfPieces
-                    employees.add(new PieceWorker(Integer.parseInt(IDTextField.getText()),
-                            firstNameTextField.getText(),
-                            lastNameTextField.getText(),
-                            Double.parseDouble(salaryTextField.getText()),
-                            "Piece worker",
-                            123
-                    ));
                     break;
             }
 
@@ -173,15 +254,10 @@ public class GUI extends Application {
         });
 
         //finalizing scene
-        labelVbox.getChildren().addAll(IDLabel, firstNameLabel, lastNameLabel, salaryLabel, positionLabel);
-        textFieldVbox.getChildren().addAll(IDTextField, firstNameTextField, lastNameTextField, salaryTextField, comboBox, confirmData, print);
+        componentVbox.setSpacing(5);
+        componentVbox.getChildren().addAll( positionHbox, IDHbox, firstNameHbox, lastNameHbox, salaryHbox, extraInfoHbox, bonusAssignedHbox, confirmData);
 
-        hBox.getChildren().addAll(labelVbox, textFieldVbox);
-
-        labelVbox.setSpacing(8);
-        hBox.setSpacing(50);
-
-        addWorkerBorderPane.setLeft(hBox);
+        addWorkerBorderPane.setLeft(componentVbox);
 
         addWorker.setContent(addWorkerBorderPane);
 

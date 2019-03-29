@@ -116,45 +116,96 @@ public class GUI extends Application {
 
             switch (comboBox.getValue().toString()) {
                 case "Chef":
+                    Boolean idInUse = false;
+                    for (Employee employee : employees) {
+                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
+                            idInUse = true;
+                            break;
+                        }
+                    }
+
+                    if(!idInUse){
+                        employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
+                                firstNameTextField.getText(),
+                                lastNameTextField.getText(),
+                                Double.parseDouble(salaryTextField.getText()),
+                                "Chef",
+                                10.0,
+                                true));
+                    } else {
+                        System.out.println("in use");
+                    }
+
                     //TODO assign text field value to bonus and assigned bonus
-                    employees.add(new Chef(Integer.parseInt(IDTextField.getText()),
-                            firstNameTextField.getText(),
-                            lastNameTextField.getText(),
-                            Double.parseDouble(salaryTextField.getText()),
-                            "Chef",
-                            10.0,
-                            true));
+
                     break;
 
                 case "Commission worker":
+                    idInUse = false;
+                    for (Employee employee : employees) {
+                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
+                            idInUse = true;
+                            break;
+                        }
+                    }
+
+                    if(!idInUse){
+                        employees.add(new CommissionWorker(Integer.parseInt(IDTextField.getText()),
+                                firstNameTextField.getText(),
+                                lastNameTextField.getText(),
+                                Double.parseDouble(salaryTextField.getText()),
+                                "Commission worker",
+                                10
+                        ));
+                    } else {
+                        System.out.println("in use");
+                    }
                     //TODO assign text field value to amountOfCommissions
-                    employees.add(new CommissionWorker(Integer.parseInt(IDTextField.getText()),
-                            firstNameTextField.getText(),
-                            lastNameTextField.getText(),
-                            Double.parseDouble(salaryTextField.getText()),
-                            "Commission worker",
-                            10
-                    ));
                     break;
                 case "Hour worker":
+                    idInUse = false;
+                    for (Employee employee : employees) {
+                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
+                            idInUse = true;
+                            break;
+                        }
+                    }
+
+                    if(!idInUse){
+                        employees.add(new HourWorker(Integer.parseInt(IDTextField.getText()),
+                                firstNameTextField.getText(),
+                                lastNameTextField.getText(),
+                                Double.parseDouble(salaryTextField.getText()),
+                                "Hour worker",
+                                123
+                        ));
+                    } else {
+                        System.out.println("in use");
+                    }
                     //TODO assign text field value to hoursWorked
-                    employees.add(new HourWorker(Integer.parseInt(IDTextField.getText()),
-                            firstNameTextField.getText(),
-                            lastNameTextField.getText(),
-                            Double.parseDouble(salaryTextField.getText()),
-                            "Hour worker",
-                            123
-                    ));
+
                     break;
                 case "Piece worker":
+                    idInUse = false;
+                    for (Employee employee : employees) {
+                        if(employee.getID() == Integer.parseInt(IDTextField.getText())){
+                            idInUse = true;
+                            break;
+                        }
+                    }
+
+                    if(!idInUse){
+                        employees.add(new PieceWorker(Integer.parseInt(IDTextField.getText()),
+                                firstNameTextField.getText(),
+                                lastNameTextField.getText(),
+                                Double.parseDouble(salaryTextField.getText()),
+                                "Piece worker",
+                                123
+                        ));
+                    } else {
+                        System.out.println("in use");
+                    }
                     //TODO assign text field value to amountOfPieces
-                    employees.add(new PieceWorker(Integer.parseInt(IDTextField.getText()),
-                            firstNameTextField.getText(),
-                            lastNameTextField.getText(),
-                            Double.parseDouble(salaryTextField.getText()),
-                            "Piece worker",
-                            123
-                    ));
                     break;
             }
 

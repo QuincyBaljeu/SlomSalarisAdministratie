@@ -27,6 +27,7 @@ public class Chef extends Employee {
                 + "Bonus assigned: " + this.bonusAssigned;
     }
 
+    @Override
     public double getMonthlySalary() {
         double monthlySalary;
         if (this.bonusAssigned) {

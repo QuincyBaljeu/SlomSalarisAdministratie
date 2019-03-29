@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -267,7 +265,7 @@ public class GUI extends Application {
          */
 
         BorderPane salaryInfoBorderPane = new BorderPane();
-        ObservableList<Employee> salaryList = FXCollections.observableArrayList();
+        ObservableList<SalaryCalculation> salaryList = FXCollections.observableArrayList();
         HBox salaryInfoHbox = new HBox();
         Label salaryInfoIdLabel = new Label("Enter employee id");
         Label salaryInfoWeekLabel = new Label("Amount of weeks");
@@ -287,12 +285,37 @@ public class GUI extends Application {
 
         salaryInfoTableview.getColumns().addAll(salaryInfoIDColumn, salaryInfoLastNameColumn, salaryInfoSalaryColumn);
 
-        salaryInfoButton.setOnAction(event -> {
+//        salaryInfoButton.setOnAction(event -> {
+//            salaryInfoTableview.getItems().clear();
+//            Employee selectedEmployee = null;
+//            for(Employee employee : employees){
+//                if(employee.getID() == Integer.valueOf(salaryInfoId.getText())){
+//                    selectedEmployee = employee;
+//                    break;
+//                }
+//            }
+//
+//            if(selectedEmployee != null){
+//                int ID = selectedEmployee.getID();
+//                String lastName = selectedEmployee.getLastName();
+//                double salary = (selectedEmployee.getMonthlySalary()) * Integer.valueOf(salaryInfoWeeks.getText());
+//                salaryList.add(new SalaryCalculation(ID, lastName, salary));
+//            }
+//
+//            double totalSalary = 0;
+//            for (SalaryCalculation salaryCalculation : salaryList) {
+//                totalSalary += salaryCalculation.getSalary();
+//                salaryList.add(new SalaryCalculation(0, "Total salary cost: ", totalSalary));
+//            }
+//
+//            for (SalaryCalculation salaryCalculation : salaryList) {
+//                System.out.println(salaryCalculation.getID());
+//            }
+//        });
 
-            
 
 
-        });
+        salaryInfoTableview.setItems(salaryList);
 
         salaryInfoHbox.setSpacing(10);
         salaryInfoHbox.getChildren().addAll(salaryInfoIdLabel, salaryInfoId, salaryInfoWeekLabel, salaryInfoWeeks, salaryInfoButton);
@@ -308,6 +331,12 @@ public class GUI extends Application {
 
         TableView workerInfoTableView = new TableView();
 
+        HBox workerInfoTotalHbox = new HBox();
+        workerInfoTotalHbox.setSpacing(20);
+        Button workerInfoTotal = new Button("Total cost");
+        Label totalSalaryCostLabel = new Label("");
+        workerInfoTotalHbox.getChildren().addAll(workerInfoTotal, totalSalaryCostLabel);
+
         TableColumn workerIdColumn = new TableColumn("Worker id");
         TableColumn workerLastNameColumn = new TableColumn("Last name");
         TableColumn workerSalaryColumn = new TableColumn("Salary");
@@ -320,7 +349,16 @@ public class GUI extends Application {
 
         workerInfoTableView.setItems(employees);
 
-        workerInfoBorderpane.setCenter(workerInfoTableView);
+        workerInfoTotal.setOnAction(event -> {
+            double totalSalary = 0;
+            for (Employee employee : employees){
+                totalSalary += employee.getMonthlySalary();
+            }
+            totalSalaryCostLabel.setText("Total salary cost per month: €" + totalSalary);
+        });
+
+        workerInfoBorderpane.setBottom(workerInfoTableView);
+        workerInfoBorderpane.setTop(workerInfoTotalHbox);
 
         workerInfo.setContent(workerInfoBorderpane);
 

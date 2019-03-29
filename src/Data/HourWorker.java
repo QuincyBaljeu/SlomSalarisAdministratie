@@ -24,6 +24,7 @@ public class HourWorker extends Employee {
                 + "Hours worked: " + this.hoursWorked;
     }
 
+    @Override
     public double getMonthlySalary() {
         double monthlySalary = this.hoursWorked * salary;
         return monthlySalary;

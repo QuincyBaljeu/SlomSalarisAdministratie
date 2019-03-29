@@ -59,4 +59,8 @@ public abstract class Employee {
     public void setPosition(String position) {
         this.position = position;
     }
+
+    public double getMonthlySalary(){
+        return this.salary;
+    }
 }

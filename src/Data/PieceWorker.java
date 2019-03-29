@@ -24,6 +24,7 @@ public class PieceWorker extends Employee {
                 + "Amount of pieces: " + this.amountOfPieces;
     }
 
+    @Override
     public double getMonthlySalary(){
         double monthlySalary = this.salary + (5 * this.amountOfPieces);
         return monthlySalary;
